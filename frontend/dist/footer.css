@@ -1,0 +1,28 @@
+.footer {
+    font-size: 13px;
+    color: #59626D;
+}
+.footer__item {
+    padding: 20px 15px 0;
+}
+
+
+.footer__sub-nav li a {
+    font-size: 13px;
+    display: block;
+    color: #59626D;
+    padding: .5rem 0;
+    padding-right: .75rem;
+}
+
+.footer__item:not(:last-child) {
+    border-bottom: 1px solid #D5DCE5;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.footer__inner {
+    border-top: 1px solid #D5DCE5;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}

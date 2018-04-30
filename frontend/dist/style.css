@@ -1,0 +1,21 @@
+a {
+    color: #00A4FF;
+    text-decoration: none;
+}
+
+.main {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    position: relative;
+}
+
+body {
+    min-height: 100%;
+}
+
+.sub-nav {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
