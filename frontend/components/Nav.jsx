@@ -30,24 +30,24 @@ export default class Nav extends React.Component {
                             </div>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="https://themes.getbootstrap.com/sell/">About</a>
+                            <a className="nav-link" href="">About</a>
                         </li>
                     </ul>
                     <ul className="navbar-nav d-none d-lg-flex ml-2 order-3">
                         <li className="nav-item">
-                            <a className="nav-link" href="https://themes.getbootstrap.com/signin/">Sign in</a>
+                            <a className="nav-link" href="">Sign in</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="https://themes.getbootstrap.com/my-account/">Sign up</a>
+                            <a className="nav-link" href="">Sign up</a>
                         </li>
                     </ul>
                     <ul className="navbar-nav d-lg-none">
                         <li className="nav-item-divider"></li>
                         <li className="nav-item">
-                            <a className="nav-link" href="https://themes.getbootstrap.com/signin/">Sign in</a>
+                            <a className="nav-link" href="">Sign in</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="https://themes.getbootstrap.com/my-account/">Sign up</a>
+                            <a className="nav-link" href="">Sign up</a>
                         </li>
                     </ul>
                 </div>

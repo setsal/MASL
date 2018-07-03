@@ -14,11 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.views import generic
+from rest_framework.routers import DefaultRouter
+from fb_fetch import views
+
+router = DefaultRouter()
+router.register(r'fb_fetch', views.Fb_fetchViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('view2/', generic.TemplateView.as_view(template_name='view2.html')),
     path('', generic.TemplateView.as_view(template_name='view1.html')),
+    path('api/', include(router.urls))
 ]

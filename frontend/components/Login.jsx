@@ -7,7 +7,7 @@ export default class Login extends React.Component {
           <div className="text-center mb-4">
             <img className="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
             <h1 className="h3 mb-3 font-weight-normal">Floating labels</h1>
-            <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, and Firefox.</a></p>
+            <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a href="">Works in latest Chrome, Safari, and Firefox.</a></p>
           </div>
 
           <div className="form-label-group">
