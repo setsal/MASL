@@ -11,6 +11,7 @@ export default class Homepage extends Component {
                     <img src={logo}/>
                 </div>
             </section>
-        </main>)
+            </main>
+        )
     }
 }
