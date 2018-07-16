@@ -9,9 +9,10 @@ const Main = styled.main`
 
 
 const Team = styled.div`
-    border-top: 2px solid #8f8d87;
     padding: 0 0 72px;
 `;
+
+
 
 const IntroArticle = styled.article`
     border-top: 2px solid #8f8d87;
@@ -37,6 +38,7 @@ const Article = styled.article`
     overflow: hidden;
     position: relative;
     padding: 48px 30px 53px;
+    border-top: 2px solid #8f8d87;
 `;
 
 const ImgBlock = styled.div`
@@ -101,6 +103,45 @@ export default class About extends Component {
                         <h1>setsal Lan</h1>
                         <p>To be continue...</p>
                         <p><a href="https://github.com/setsal"><i className="fab fa-github fa-2x"></i></a></p>
+                    </TextBox>
+                </Article>
+                <Article className="row">
+                    <ImgBlock className="col-md-6">
+                        <ImgBlockInner>
+                            <img src="https://avatars0.githubusercontent.com/u/15828515?s=460&v=4" />
+                        </ImgBlockInner>
+                    </ImgBlock>
+
+                    <TextBox className="col-md-6">
+                        <h1>Meteor Hsu</h1>
+                        <p>To be continue...</p>
+                        <p><a href="https://github.com/ekids1234"><i className="fab fa-github fa-2x"></i></a></p>
+                    </TextBox>
+                </Article>
+                <Article className="row">
+                    <ImgBlock className="col-md-6">
+                        <ImgBlockInner>
+                            <img src="https://avatars3.githubusercontent.com/u/32054693?s=460&v=4" />
+                        </ImgBlockInner>
+                    </ImgBlock>
+
+                    <TextBox className="col-md-6">
+                        <h1>Andy Chu</h1>
+                        <p>To be continue...</p>
+                        <p><a href="https://github.com/CZ75auto"><i className="fab fa-github fa-2x"></i></a></p>
+                    </TextBox>
+                </Article>
+                <Article className="row">
+                    <ImgBlock className="col-md-6">
+                        <ImgBlockInner>
+                            <img src="https://avatars1.githubusercontent.com/u/40795118?s=460&v=4" />
+                        </ImgBlockInner>
+                    </ImgBlock>
+
+                    <TextBox className="col-md-6">
+                        <h1>Momo</h1>
+                        <p>To be continue...</p>
+                        <p><a href="https://github.com/ljk25679"><i className="fab fa-github fa-2x"></i></a></p>
                     </TextBox>
                 </Article>
             </Team>
