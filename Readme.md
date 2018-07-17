@@ -30,6 +30,6 @@ $ python manage.py runserver
 ## Contributors
 
 - setsal Lan
-- Meteor Hsu
+- MeteorV Hsu
 - Andy Chu
 - Momo Zhang
