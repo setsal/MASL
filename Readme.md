@@ -20,6 +20,10 @@ $ node server.js
 $ python manage.py runserver
 ```
 
+Reset Migration:
+ 1. Remove target table in database
+ 2. run the ResetMigration.sh script
+
 
 ## Cautions:
  -  WordCloud Package need Microsoft Visual Studio C++ 14.0 package, you must install it before using.
