@@ -1,7 +1,7 @@
 
 import sys
 import sqlite3
-conn = sqlite3.connect('db.sqlite3') #連結指定的資料庫
+conn = sqlite3.connect('../../db.sqlite3')  # 連結指定的資料庫
 
 # it is only for create a table of Fan Page (column: name, id)
 def create_database(table_name):
