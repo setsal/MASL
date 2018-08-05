@@ -30,7 +30,7 @@ def getFanpageInfofromTxt(filename):
 # Usage : myscript.py /my/folder/of/stuff/*.txt
 # Example : python3 create.py *.txt
 def main():
-    table_name = "fanpage_info"
+    table_name = "fb_club"
 
     # if u first use it ,uncomment this
     create_database(table_name)
