@@ -18,9 +18,10 @@ def create_club( fanpage_id, fanpage_name ):
 
 # insert to sql
 def insert_data( fanpage_id, text_id, contents ):
-    for content in contents:
-        data = ''.join(content)
-        conn.execute("insert into fb_fetch_article ( cid, textid, content, created_at ) values( ?, ?, ?, ? )", ( fanpage_id, text_id, data, datetime.datetime.now()) )
+    for i in range(text_id):
+        data = ''.join(contents[i])
+        tid = "{:05d}".format(i)
+        conn.execute("insert into fb_fetch_article ( cid, textid, content, created_at ) values( ?, ?, ?, ? )", ( fanpage_id, tid, data, datetime.datetime.now()) )
         conn.commit()
 
 
@@ -36,11 +37,6 @@ def readfile(filename):
     content = [[]for i in range(10) ]
     idx = 0
 
-
-
-    # Create club index
-    create_club( fanpage_id, fanpage_name )
-
     # generate array list
     for i in range( len(lines) ):
         if ( i == 0 or i == 1 ):
@@ -50,23 +46,30 @@ def readfile(filename):
             idx+=1
 
         if ( idx > 9 ):
-            print("Error in " + fanpage_name + " textfile")
-            print("The text file is out of range, check if it is valid")
+            logging.error("Error in %s textfile" % fanpage_name )
+            logging.error("The text file is out of range, check if it is valid")
             sys.exit()
 
         content[idx].append(lines[i])
 
     # add to sql
-    print("嘗試新增 " + fanpage_name + " 粉專內容")
-    insert_data( fanpage_id, 0, content )
+    logging.info("嘗試新增 %s 粉專內容" % fanpage_name )
+
+    #Create club index
+    create_club( fanpage_id, fanpage_name )
+    insert_data( fanpage_id, idx, content )
+
 
 
 # Main func
 def main():
+
+    logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
+
     if len(sys.argv) < 2:
-        print("Info: No argument")
-        print("Usage: $python tranfer.py [filename1] [filename2] [filename3]")
-        print("Btw, *.txt also work.")
+        logging.error("No argument")
+        logging.info("Usage: $python tranfer.py [filename1] [filename2] [filename3]")
+        logging.info("Btw, *.txt also work.")
         sys.exit()
 
     for filename in sys.argv[1:]:
