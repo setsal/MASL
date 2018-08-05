@@ -5,9 +5,5 @@ pybin/nlp/dict.txt.big.txt
 pybin/nlp/stop_words.txt
 pybin/nlp/test.txt
 webpack-stats-local.json
-<<<<<<< HEAD
-.vscode
-=======
 .vscode
 package-lock.json
->>>>>>> b6ab87fb2b896307c77586a7c07a3710b6c7a4ef
