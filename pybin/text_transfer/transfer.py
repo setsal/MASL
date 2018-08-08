@@ -6,14 +6,22 @@ import os
 import sqlite3
 import datetime
 import time
+import logging
 conn = sqlite3.connect('../../db.sqlite3') #連結指定的資料庫
+
+
+
+def create_club( fanpage_id, fanpage_name ):
+    conn.execute("insert into fb_fetch_club ( cid, name, created_at ) values( ?, ?, ? )", ( fanpage_id, fanpage_name, datetime.datetime.now()) )
+    conn.commit()
 
 
 # insert to sql
 def insert_data( fanpage_id, text_id, contents ):
-    for content in contents:
-        data = ''.join(content)
-        conn.execute("insert into fb_fetch_article ( cid, textid, content, created_at ) values( '{}', '{}', '{}', '{}');".format( fanpage_id, text_id, data, datetime.datetime.now() ))
+    for i in range(text_id):
+        data = ''.join(contents[i])
+        tid = "{:05d}".format(i)
+        conn.execute("insert into fb_fetch_article ( cid, textid, content, created_at ) values( ?, ?, ?, ? )", ( fanpage_id, tid, data, datetime.datetime.now()) )
         conn.commit()
 
 
@@ -23,8 +31,8 @@ def readfile(filename):
     lines = fp.readlines()
     fp.close()
 
-    fanpage_name = lines[0]
-    fanpage_id = lines[1]
+    fanpage_name = lines[0].strip("\n")
+    fanpage_id = lines[1].strip("\n")
 
     content = [[]for i in range(10) ]
     idx = 0
@@ -37,22 +45,36 @@ def readfile(filename):
         if( lines[i] == '\n' ):
             idx+=1
 
+        if ( idx > 9 ):
+            logging.error("Error in %s textfile" % fanpage_name )
+            logging.error("The text file is out of range, check if it is valid")
+            sys.exit()
+
         content[idx].append(lines[i])
 
     # add to sql
-    insert_data( fanpage_id, 0, content )
+    logging.info("嘗試新增 %s 粉專內容" % fanpage_name )
+
+    #Create club index
+    create_club( fanpage_id, fanpage_name )
+    insert_data( fanpage_id, idx, content )
+
 
 
 # Main func
 def main():
+
+    logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
+
     if len(sys.argv) < 2:
-        print("Info: No argument")
-        print("Usage: $python tranfer.py [filename1] [filename2] [filename3]")
+        logging.error("No argument")
+        logging.info("Usage: $python tranfer.py [filename1] [filename2] [filename3]")
+        logging.info("Btw, *.txt also work.")
         sys.exit()
 
     for filename in sys.argv[1:]:
         readfile(filename)
 
 
-
-main()
+if __name__ == '__main__':
+    main()
