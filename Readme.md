@@ -20,6 +20,12 @@ $ node server.js
 $ python manage.py runserver
 ```
 
+Create DB file with django
+
+``$ python manage.py migrate``
+``$ python trasnfer.py text/*txt``
+
+
 Reset Migration:
  1. Remove target table in database
  2. run the ResetMigration.sh script
