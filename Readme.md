@@ -20,20 +20,21 @@ $ node server.js
 $ python manage.py runserver
 ```
 
-
 ## Database
-
-Reset Migration ( if it is necessary  ):
- 1. Remove target table in database
- 2. run the ResetMigration.sh script
+Create DB file with django
+ - ``$ python manage.py migrate``
 
 Insert Data:
  1. Add text file in `pybin/text_transfer/text/`
  2. Run `transfer.py [textfile]`
- 3. Use sqlite browser to check the data is correct.
+ 3. Use sqlite browser to check the data is correct
 
-Reset Database:
- 1. Run `pybin/text_transfer/reset_table.py`
+Reset & Clear All Data in DB ( recommend ):
+ - Run `pybin/text_transfer/reset_table.py`
+
+Reset Migration ( if it is necessary ):
+  1. Remove target table in database
+  2. run the ResetMigration.sh script
 
 
 ## Cautions:
