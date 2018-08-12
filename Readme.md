@@ -21,8 +21,9 @@ $ python manage.py runserver
 ```
 
 Create DB file with django
-
 ``$ python manage.py migrate``
+
+Insert the txt file to db file
 ``$ python trasnfer.py text/*txt``
 
 
