@@ -8,6 +8,8 @@ conn = sqlite3.connect('../../db.sqlite3') #連結指定的資料庫
 
 # Main func
 def main():
+    conn.execute("DELETE FROM fb_fetch_article");
+    conn.execute("DELETE FROM fb_fetch_club");
     conn.execute("delete from sqlite_sequence where name = 'fb_fetch_club'");
     conn.execute("delete from sqlite_sequence where name = 'fb_fetch_article'");
     conn.commit()

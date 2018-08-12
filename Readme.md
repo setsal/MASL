@@ -20,9 +20,20 @@ $ node server.js
 $ python manage.py runserver
 ```
 
-Reset Migration:
+
+## Database
+
+Reset Migration ( if it is necessary  ):
  1. Remove target table in database
  2. run the ResetMigration.sh script
+
+Insert Data:
+ 1. Add text file in `pybin/text_transfer/text/`
+ 2. Run `transfer.py [textfile]`
+ 3. Use sqlite browser to check the data is correct.
+
+Reset Database:
+ 1. Run `pybin/text_transfer/reset_table.py`
 
 
 ## Cautions:

@@ -4,6 +4,8 @@ node_modules
 pybin/nlp/dict.txt.big.txt
 pybin/nlp/stop_words.txt
 pybin/nlp/test.txt
+pybin/jieba_dict/
+pybin/train/output/
 webpack-stats-local.json
 .vscode
 package-lock.json
