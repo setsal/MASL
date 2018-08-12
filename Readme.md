@@ -28,8 +28,8 @@ Insert the txt file to db file
 
 
 Reset Migration:
- 1. Remove target table in database
- 2. run the ResetMigration.sh script
+- Soft way : ``python reset_table.py``
+- Hard way : run the ResetMigration.sh script
 
 
 ## Cautions:
