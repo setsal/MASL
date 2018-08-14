@@ -6,6 +6,8 @@ pybin/nlp/stop_words.txt
 pybin/nlp/test.txt
 pybin/jieba_dict/
 pybin/train/output/
+pybin/train/input/
+pybin/train/-Similarity-index*
 webpack-stats-local.json
 .vscode
 package-lock.json
