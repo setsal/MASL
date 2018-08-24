@@ -26,7 +26,7 @@ Create DB file with django
 
 Insert Data:
  1. Add text file in `pybin/text_transfer/text/`
- 2. Run `transfer.py [textfile]`
+ 2. enter `pybin/text_transfer` and Run `transfer.py [textfile]`
  3. Use sqlite browser to check the data is correct
 
 Reset & Clear All Data in DB ( recommend ):
