@@ -42,6 +42,14 @@ def main():
         print(result)
     """
 
+    # test_data = ''
+    # with open('input/test.txt', 'r', encoding='utf-8') as f:
+    #     for line in f:
+    #         words = jieba.cut(line)
+    #         test_data += ' '.join(words)
+    #
+    # print(test_data.split())
+
     test_data = []
     init_stopword()
     test_data = getTestData('input/test.txt')
