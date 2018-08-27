@@ -48,7 +48,17 @@ def getSingleSegment(data):
 
 def getTestData(path):
     data = []
-    with open('input/test.txt', 'r', encoding='utf-8') as f:
+    with open(path, 'r', encoding='utf-8') as f:
         for line in f:
             data.append(''.join(line.strip('\n').split()))
     return data
+
+
+# Get single article keywords
+def getSingleKeywords(data, n):
+    keywords = []
+    article = ' '.join(data)
+    words = jieba.analyse.extract_tags( article, n )
+    remain_words = list(filter(lambda a: a not in stopWords, words))
+    keywords.extend(remain_words)
+    return keywords
