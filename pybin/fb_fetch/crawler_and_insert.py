@@ -4,7 +4,6 @@ import time
 import sys
 import io
 from gettweepy import *
-from test1 import *
 
 conn = sqlite3.connect('../../db.sqlite3')  # 連結指定的資料庫
 cur = conn.cursor()
@@ -27,17 +26,13 @@ def insert_data(table_name,input_arr):
 			conn.commit()
 
 def setsal_insert_data( fanpage_id, table_name, input_arr ):
-	i = 2;
 	for post in input_arr:
 		#print(post,"\n\n")
 		if 'message' in post.keys():
 			conn.execute("insert into fb_fetch_article (  uid, textid, content, created_at ) values( '{}', '{}', '{}', '{}');".format( fanpage_id, post['id'], post['message'], datetime.datetime.now()) )
 			conn.commit()
-		i = i+1
 def tweet_insert( table_name ):
 	#conn.execute('SELECT count(*) FROM {}'.format( table_name ))
-	x = get1num()
-	print(x)
 	print(getUserId())
 	input_arr = from_public_to_dict(getUserId(), getPT())
 	for post in input_arr:
