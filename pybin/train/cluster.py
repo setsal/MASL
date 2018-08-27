@@ -16,8 +16,7 @@ def my_absmax(sequence):
     maximum = sequence[0]
 
     for item in sequence:
-        # Compare elements by their weight stored
-        # in their second element.
+        # Compare elements by their weight stored in their second element.
         if abs(item[1]) > abs(maximum[1]):
             maximum = item
 
@@ -62,7 +61,7 @@ def main():
     for row in conn.execute('SELECT id, content FROM fb_fetch_article'):
         articles.append(row[1])
     
-    for i in range(num_topic)):
+    for i in range(num_topic):
         print("*********************************************************************")
         print("Topic" + str(i + 1) + ":")
         for id in topic_list_sort_by_topic[i]:
