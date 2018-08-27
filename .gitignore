@@ -7,6 +7,8 @@ pybin/nlp/test.txt
 pybin/jieba_dict/
 pybin/train/output/
 pybin/train/input/
+pybin/word_cloud/output/
+pybin/word_cloud/input/
 pybin/train/-Similarity-index*
 webpack-stats-local.json
 .vscode

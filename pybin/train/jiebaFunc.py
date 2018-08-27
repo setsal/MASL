@@ -51,6 +51,7 @@ def getTestData(path):
     with open(path, 'r', encoding='utf-8') as f:
         for line in f:
             data.append(''.join(line.strip('\n').split()))
+    f.close()
     return data
 
 
