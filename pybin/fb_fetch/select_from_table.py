@@ -27,7 +27,8 @@ return   : integer, the number of row.
 # =========  CODE  ============
 
 def cid_to_cname(table_name, cid):
-	cursor = conn.execute('select name from {} WHERE cid="{}";'.format(table_name, cid))
+	cursor = conn.execute(
+		'select name from {} WHERE cid="{}";'.format(table_name, cid))
 	return cursor.fetchone()[0]
 
 # test it !
