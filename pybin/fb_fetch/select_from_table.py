@@ -11,8 +11,14 @@ cur = conn.cursor()
 
 # ========= Interface =========
 '''
+import select_from_table
+
 function : cid_to_name( table_name , cid )
 return   : string, Just a char_arr.
+
+function : count_num_of_row( table_name )
+return   : integer, the number of row.
+
 '''
 # =============================
 
@@ -26,6 +32,15 @@ def cid_to_cname(table_name, cid):
 
 # test it !
 #print(cid_to_cname("fb_fetch_club", 120909948018734))
+
+
+def count_num_of_row(table_name):
+	cursor = conn.execute(
+		'select count() from {} ;'.format(table_name))
+	return cursor.fetchone()[0]
+
+# test it !
+# print(tecount_num_of_rowst("fb_fetch_club"))
 
 # Just backup.
 def disp_content():
