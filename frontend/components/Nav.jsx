@@ -30,7 +30,7 @@ export default class Nav extends React.Component {
                             </div>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="about/">About</a>
+                            <a className="nav-link" href="/about/">About</a>
                         </li>
                     </ul>
                     <ul className="navbar-nav d-none d-lg-flex ml-2 order-3">

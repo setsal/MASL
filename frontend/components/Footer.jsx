@@ -13,7 +13,7 @@ export default class Footer extends React.Component {
                                 <a title="Help Center" href="">Help Center</a>
                             </li>
                             <li id="menu-item-119" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-119">
-                                <a title="Terms of Service" href="">About US</a>
+                                <a title="Terms of Service" href="/about/">About US</a>
                             </li>
                             <li id="menu-item-117" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-117">
                                 <a title="Licenses" href="">Licenses</a>

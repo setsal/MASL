@@ -20,6 +20,11 @@ def create_club( fanpage_id, fanpage_name ):
 def insert_data( fanpage_id, text_id, contents ):
     for i in range(text_id):
         data = ''.join(contents[i])
+
+        # Remove too less article
+        if ( len(data) <= 10 ):
+            continue;
+
         tid = "{:05d}".format(i)
         conn.execute("insert into fb_fetch_article ( cid, textid, content, created_at ) values( ?, ?, ?, ? )", ( fanpage_id, tid, data, datetime.datetime.now()) )
         conn.commit()

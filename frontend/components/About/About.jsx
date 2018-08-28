@@ -1,151 +1,109 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components';
 
-
-const Main = styled.main`
+const Main = styled.main `
     padding: 36px 0 47px;
-`;
-
-
-
-const Team = styled.div`
-    padding: 0 0 72px;
-`;
-
-
-
-const IntroArticle = styled.article`
-    border-top: 2px solid #8f8d87;
-    padding: 27px 0 26px 2px;
-    h1 {
-        display: inline-block;
-        vertical-align: middle;
-        margin: 0 11% 0 0;
-        width: 38.5%;
-        text-transform: uppercase;
-    }
-    .box {
-        display: inline-block;
-        vertical-align: middle;
-        width: 50%;
-        font-size: 26px;
-        line-height: 28px;
+    h2 {
+        font-weight: 300;
+        font-size: 32px;
+        line-height: 1.25;
+        margin-bottom: 5rem;
+        margin-top: 2rem;
     }
 `;
 
-
-const Article = styled.article`
-    overflow: hidden;
-    position: relative;
-    padding: 48px 30px 53px;
-    border-top: 2px solid #8f8d87;
-`;
-
-const ImgBlock = styled.div`
-    float: left;
-`;
-
-const ImgBlockInner = styled.div`
-    overflow: hidden;
+const PersonalIMG = styled.img `
+    margin-bottom: 1.5rem;
+    width: 114px;
+    border-radius: 50%;
     display: block;
-    position: relative;
-    img {
-        height: 50%;
-        width: 59%;
-        border-radius: 150px;
-        margin-left: 100px;
-        border: 2px solid #dbdbdb;
-    }
-`;
+    max-width: 100%;
+    height: auto;
+`
 
-const TextBox = styled.div`
-    h1 {
-        text-transform: uppercase;
-        margin: 90px 0 11px;
+const Personal = styled.div `
+    margin-bottom: 5rem;
+    .text-md {
+        font-size: 20px;
     }
-    a {
-        color: #4a4b4c;
+    .text-xxs {
+        font-size: 12px;
     }
-`;
+    .description {
+        max-width: 20rem;
+        font-size: 16px;
+    }
+`
+const Jumbotron = styled.section `
+    text-align: center;
+    background: #98ddf5;
+    .mission {
+        font-weight: 300
+    }
+`
 
-const contributors = [
-  {id: 1, name: 'setsal Lan', description: 'To be continue...', p_img: 'https://avatars0.githubusercontent.com/u/18705824?s=460&v=4', github: 'https://github.com/setsal' },
-  {id: 2, name: 'setsal La2n', description: 'To be continue...', p_img: 'https://avatars0.githubusercontent.com/u/18705824?s=460&v=4', github: 'https://github.com/setsal' }
-];
+const Leadership = styled.div `
+    
+`
 
-function Contributors(props) {
-  const content = props.contributors.map((contributor) =>
-    <div key={contributor.id}>
-        <h3>{contributor.name}</h3>
-      <h3>{contributor.description}</h3>
-    </div>
-  );
-  return (
-    <div>
-      {content}
-    </div>
-  );
-}
+
 
 export default class About extends Component {
-  render() {
-    return (
-        <Main className="container">
-            <Team>
-                <Article className="row">
-                    <ImgBlock className="col-md-6">
-                        <ImgBlockInner>
-                            <img src="https://avatars0.githubusercontent.com/u/18705824?s=460&v=4" />
-                        </ImgBlockInner>
-                    </ImgBlock>
+    render() {
+        return (
 
-                    <TextBox className="col-md-6">
-                        <h1>setsal Lan</h1>
-                        <p>To be continue...</p>
-                        <p><a href="https://github.com/setsal"><i className="fab fa-github fa-2x"></i></a></p>
-                    </TextBox>
-                </Article>
-                <Article className="row">
-                    <ImgBlock className="col-md-6">
-                        <ImgBlockInner>
-                            <img src="https://avatars0.githubusercontent.com/u/15828515?s=460&v=4" />
-                        </ImgBlockInner>
-                    </ImgBlock>
+            <div style={{
+                'backgroundColor': '#eaf3f3'
+            }}>
+                <title>About US</title>
 
-                    <TextBox className="col-md-6">
-                        <h1>Meteor Hsu</h1>
-                        <p>To be continue...</p>
-                        <p><a href="https://github.com/ekids1234"><i className="fab fa-github fa-2x"></i></a></p>
-                    </TextBox>
-                </Article>
-                <Article className="row">
-                    <ImgBlock className="col-md-6">
-                        <ImgBlockInner>
-                            <img src="https://avatars3.githubusercontent.com/u/32054693?s=460&v=4" />
-                        </ImgBlockInner>
-                    </ImgBlock>
+                <Main>
+                    <Leadership>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-xxs-12 col-lg-10 mx-auto">
+                                    <div className="row">
+                                        <section className="card card-lg p-b-0 text-xxs-center" id="about-leadership">
+                                            <h2>Leadership</h2>
 
-                    <TextBox className="col-md-6">
-                        <h1>Andy Chu</h1>
-                        <p>To be continue...</p>
-                        <p><a href="https://github.com/CZ75auto"><i className="fab fa-github fa-2x"></i></a></p>
-                    </TextBox>
-                </Article>
-                <Article className="row">
-                    <ImgBlock className="col-md-6">
-                        <ImgBlockInner>
-                            <img src="https://avatars1.githubusercontent.com/u/40795118?s=460&v=4" />
-                        </ImgBlockInner>
-                    </ImgBlock>
+                                            <div className="row">
+                                                <Personal className="col-xxs-12 col-sm-6 col-xxl-3 m-b-xxl">
+                                                    <PersonalIMG className="img-circle img-fluid mx-auto m-b" src="https://avatars0.githubusercontent.com/u/18705824?s=460&v=4"/>
+                                                    <h3 className="text-md text-bold">setsal Lan</h3>
+                                                    <p className="text-xxs mb-2 text-uppercase">Programer</p>
+                                                    <p className="description mx-auto">
+                                                        似乎是雜食菜吃多了, 又或是這五光十色的社會所迷惘, 腦中想的, 總沒有個好想法
+                                                    </p>
+                                                </Personal>
+                                                <Personal className="col-xxs-12 col-sm-6 col-xxl-3 m-b-xxl">
+                                                    <PersonalIMG className="img-fluid mx-auto m-b" src="https://avatars1.githubusercontent.com/u/40795118?s=460&v=4"/>
+                                                    <h3 className="text-md text-bold">Momo Zhang</h3>
+                                                    <p className="text-xxs mb-2 text-uppercase">Programer</p>
+                                                    <p className="description mx-auto">資訊工程學系 大四 卷哥大大</p>
+                                                </Personal>
+                                                <Personal className="col-xxs-12 col-sm-6 col-xxl-3 m-b-xxl">
+                                                    <PersonalIMG className="img-fluid mx-auto m-b" src="https://avatars0.githubusercontent.com/u/15828515?s=460&v=4"/>
+                                                    <h3 className="text-md text-bold">MeteorV Hsu</h3>
+                                                    <p className="text-xxs mb-2 text-uppercase">Programer</p>
+                                                    <p className="description mx-auto">資訊工程學系 大四 猛猛大大</p>
+                                                </Personal>
+                                                <Personal className="col-xxs-12 col-sm-6 col-xxl-3 m-b-xxl">
+                                                    <PersonalIMG className="img-fluid mx-auto m-b" src="https://avatars3.githubusercontent.com/u/32054693?s=460&v=4"/>
+                                                    <h3 className="text-md text-bold">Andy Chu</h3>
+                                                    <p className="text-xxs mb-2 text-uppercase">Programer</p>
+                                                    <p className="description mx-auto">資訊工程學系 大四 也是大大</p>
+                                                </Personal>
+                                            </div>
 
-                    <TextBox className="col-md-6">
-                        <h1>Momo</h1>
-                        <p>To be continue...</p>
-                        <p><a href="https://github.com/ljk25679"><i className="fab fa-github fa-2x"></i></a></p>
-                    </TextBox>
-                </Article>
-            </Team>
-        </Main>
-    )
-  }
+                                        </section>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Leadership>
+                </Main>
+            </div>
+        )
+    }
 }

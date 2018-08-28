@@ -6,6 +6,7 @@ export default class Homepage extends Component {
     render() {
         return (
             <main id="main" className="site-main main">
+            <title>MASL</title>
             <section className="hero">
                 <div className="container">
                     <img src={logo}/>
