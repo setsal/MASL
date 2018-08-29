@@ -2,10 +2,24 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
 @import url(https://fonts.googleapis.com/css?family=Abel);
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
-
 a {
-    color: #00A4FF;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
     text-decoration: none;
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #8d8d8d;
+}
+
+a:hover, a:focus {
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    text-decoration: none;
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #0000ff;
 }
 
 .main {
@@ -23,4 +37,38 @@ body {
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
+}
+
+#scrollUp {
+    background-color: #232323;
+    border-radius: 50%;
+    bottom: 60px;
+    right: 60px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    font-size: 30px;
+    height: 50px;
+    text-align: center;
+    width: 50px;
+    line-height: 46px;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+
+#scrollUp:hover {
+    background-color: #0000ff;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #scrollUp {
+        bottom: 30px;
+        right: 30px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #scrollUp {
+        bottom: 30px;
+        right: 30px;
+    }
 }

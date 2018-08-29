@@ -1,3 +1,86 @@
-.navbar {
-    border-bottom: 1px solid #E5E9EF;
+/* :: Header Area CSS */
+
+.header-area {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    left: 0;
+    z-index: 300;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+
+.header-area .navbar {
+    border-bottom: 1px solid;
+    border-color: #ffffff;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    height: 55px;
+}
+
+.header-area .navbar .navbar-nav {
+    
+}
+
+.header-area .navbar .navbar-nav .nav-link {
+    padding: 0.5em 1em;
+    font-weight: 500;
+}
+
+.header-area .navbar .navbar-nav .nav-link:hover, .header-area .navbar .navbar-nav .nav-link:focus {
+    color: #ffffff;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .header-area .navbar .navbar-nav .nav-link {
+        padding: 0.5em;
+    }
+}
+
+.header-area .navbar .navbar-nav .nav-item.active .nav-link {
+    color: #ffffff;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .header-area .navbar .navbar-nav {
+        margin-right: 30px;
+    }
+}
+
+.header-area.sticky {
+    background-color: #000000;
+    margin-top: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.header-area.sticky .navbar {
+    border-color: #000000;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #worldNav {
+        background-color: #000000;
+        padding: 30px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #worldNav {
+        background-color: #000000;
+        padding: 15px 15px 30px 15px;
+    }
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+    padding-top: 5px;
+    border-radius: 3px;
 }
