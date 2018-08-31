@@ -1,5 +1,7 @@
 import React from "react"
 import '../dist/nav.css';
+import little_logo from '../dist/little_logo.png';
+
 
 export default class Nav extends React.Component {
     render() {
@@ -10,7 +12,7 @@ export default class Nav extends React.Component {
                         <div className="col-12">
                             <nav className="navbar navbar-expand-lg">
 
-                                <a className="navbar-brand" href="/"><img  alt="MASL"/></a>
+                                <a className="navbar-brand" href="/"><img src={little_logo} alt="MASL" className="img-responsive little_logo" /></a>
 
                                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#worldNav" aria-controls="worldNav" aria-expanded="false" aria-label="Toggle navigation">
                                     <span className="navbar-toggler-icon"></span>
