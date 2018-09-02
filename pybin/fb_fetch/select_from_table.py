@@ -52,7 +52,7 @@ def count_num_of_cid(table_name, cid):
 	return cursor.fetchone()[0]
 
 # test it !
-print(count_num_of_cid("fb_fetch_article", 120909948018734))
+# print(120909948018734," 's article number is: ", count_num_of_cid("fb_fetch_article", 120909948018734))
 
 # Just backup.
 def disp_content():
