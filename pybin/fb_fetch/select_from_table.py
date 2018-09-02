@@ -19,6 +19,9 @@ return   : string, Just a char_arr.
 function : count_num_of_row( table_name )
 return   : integer, the number of row.
 
+function : count_num_of_cid( table_name , cid )
+return   : integer, the number of cid's article count.
+
 '''
 # =============================
 
@@ -42,6 +45,14 @@ def count_num_of_row(table_name):
 
 # test it !
 # print(tecount_num_of_rowst("fb_fetch_club"))
+
+def count_num_of_cid(table_name, cid):
+	cursor = conn.execute(
+		'select count("cid") from {} WHERE cid="{}";'.format(table_name, cid))
+	return cursor.fetchone()[0]
+
+# test it !
+print(count_num_of_cid("fb_fetch_article", 120909948018734))
 
 # Just backup.
 def disp_content():
