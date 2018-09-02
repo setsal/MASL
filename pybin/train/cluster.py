@@ -1,11 +1,14 @@
 import logging
 import sqlite3
 import jieba
+import numpy as np
 import gensim
 from gensim import corpora, models, similarities
 import sys
 import io
 import os
+sys.path.append('../fb_fetch')
+from select_from_table import cid_to_cname
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
 
@@ -20,7 +23,7 @@ def my_absmax(sequence):
         if abs(item[1]) > abs(maximum[1]):
             maximum = item
 
-    return maximum
+    return maximum[0]
 
 
 def main():
@@ -45,27 +48,52 @@ def main():
 
     # Get nearest topic for each article
     topic_list = []
+    index = 0
     for doc in corpus_lsi:
-        #print(my_absmax(doc))
+        #print(str(index) + ':' + str(my_absmax(doc)))
+        index = index + 1
         topic_list.append(my_absmax(doc))
-    
-    # Sort by topic
-    topic_list_sort_by_topic = []
-    for i in range(num_topic):
-        topic_list_sort_by_topic.append([x for x, y in enumerate(topic_list) if y[0] == i])
-    #print(topic_list_sort_by_topic)
+    #print('==================================')
 
+    # ======= topic of clubs =======
+    # Connect to db and print the article by id
+    conn = sqlite3.connect('../../db.sqlite3')
+
+    cid_list = []
+    for row in conn.execute('select min(id), max(id), cid from fb_fetch_article GROUP BY cid'):
+        cid_list.append(row)
+
+    for row in cid_list:
+        start = row[0] - 1
+        end = row[1]
+        #print(str(row[2]) + ':' + str(topic_list[start:end]))
+        num = max(topic_list[start:end], key=topic_list[start:end].count)
+        print(cid_to_cname('fb_fetch_club', row[2]) + ':' + 'Topic' + str(num + 1))
+        print('\n')
+    
+    # ==============================
+
+    """
+    # ======= topic of articles ========
     # Connect to db and print the article by id
     conn = sqlite3.connect('../../db.sqlite3')
     articles = []
     for row in conn.execute('SELECT id, content FROM fb_fetch_article'):
         articles.append(row[1])
+
+    # Sort by topic
+    topic_list_sort_by_topic = []
+    for i in range(num_topic):
+        topic_list_sort_by_topic.append([x for x, y in enumerate(topic_list) if y[0] == i])
+    #print(topic_list_sort_by_topic)
     
     for i in range(num_topic):
         print("*********************************************************************")
         print("Topic" + str(i + 1) + ":")
         for id in topic_list_sort_by_topic[i]:
             print(articles[id])
+    # =================================
+    """
     
 
 if __name__ == "__main__":
