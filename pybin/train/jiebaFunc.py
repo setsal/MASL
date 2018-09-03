@@ -24,6 +24,14 @@ def getArticle():
         data.append(''.join(row[1].strip('\n').split()))
     return data
 
+# Get sql data by cid
+def getArticleByCid(cid):
+    data = []
+    conn = sqlite3.connect('../../db.sqlite3')
+    for row in conn.execute('SELECT id, content FROM fb_fetch_article WHERE cid="{}";'.format(cid)):
+        data.append(''.join(row[1].strip('\n').split()))
+    return data
+
 
 # Get the segments from jieba
 def getSegment(data):
