@@ -9,6 +9,7 @@ import io
 import os
 sys.path.append('../fb_fetch')
 from select_from_table import cid_to_cname
+from jiebaFunc import getArticleByCid, getSingleKeywords
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
 
@@ -63,14 +64,25 @@ def main():
     for row in conn.execute('select min(id), max(id), cid from fb_fetch_article GROUP BY cid'):
         cid_list.append(row)
 
+    topic_cid = [[None for col in range(0)] for row in range(num_topic)]
     for row in cid_list:
         start = row[0] - 1
         end = row[1]
         #print(str(row[2]) + ':' + str(topic_list[start:end]))
         num = max(topic_list[start:end], key=topic_list[start:end].count)
-        print(cid_to_cname('fb_fetch_club', row[2]) + ':' + 'Topic' + str(num + 1))
-        print('\n')
-    
+        #print(cid_to_cname('fb_fetch_club', row[2]) + ':' + 'Topic' + str(num + 1))
+        #print('\n')
+        topic_cid[num].append(row[2])
+
+    count = 1
+    for topic in topic_cid:
+        text = []
+        for cid in topic:
+            data = getArticleByCid(cid)
+            text = text + data
+        tags = getSingleKeywords(text, 3)
+        print('Topic' + str(count) + ':' + str(tags))
+        count = count + 1
     # ==============================
 
     """
