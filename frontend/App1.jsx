@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Homepage from './components/Homepage/Homepage';
 import About from './components/About/About';
 import Footer from "./components/Footer"
+import Catagory from "./components/Catagory/CatagoryContainer"
 import Nav from "./components/Nav"
 import './dist/style.css'
 
@@ -24,6 +25,7 @@ class App1 extends React.Component {
             <Nav />
                 <Route path="/" component={Homepage} exact/>
                 <Route path="/about" component={About} />
+                <Route path="/catagory" component={Catagory} />
             <Footer />
         </Global>
         </BrowserRouter>

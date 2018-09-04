@@ -45,6 +45,7 @@ def main():
     test_data = []
     init_stopword()
     test_data = getTestData('input/test.txt')
+    print(type(test_data))
     test_data_seg = getSingleSegment(test_data)
 
     vec_bow = dictionary.doc2bow(test_data_seg)

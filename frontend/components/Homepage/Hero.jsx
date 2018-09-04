@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../../dist/hero.css';
 import styled from 'styled-components';
-import bg1 from '../../dist/img/blog-img/bg1.jpg';
+import bg1 from '../../dist/img/blog-img/bg1.png';
 import bg2 from '../../dist/img/blog-img/bg2.jpg';
 import Slider from "react-slick";
 
