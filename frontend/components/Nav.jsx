@@ -7,7 +7,7 @@ export default class Nav extends React.Component {
     render() {
         return (
             <header className="header-area">
-            
+
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -30,7 +30,7 @@ export default class Nav extends React.Component {
                                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
                                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <a className="dropdown-item" href="/">Home</a>
-                                                <a className="dropdown-item" href="/">Catagory</a>
+                                                <a className="dropdown-item" href="/catagory">Catagory</a>
                                             </div>
                                         </li>
                                         <li className="nav-item">
