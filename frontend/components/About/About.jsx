@@ -63,6 +63,8 @@ export default class About extends Component {
         }
     }
 
+    
+
     render() {
 
         let DOM = this.state.authorlist.map((author) =>
@@ -73,6 +75,29 @@ export default class About extends Component {
                 <p className="description mx-auto">
                     {author.descption}
                 </p>
+                <button type="button" className="btn btn-info btn-sm" data-toggle="modal" data-target={"#"+author.name+"ModalCenter"}>點擊查看{author.name}的訊息</button>
+
+                {/* Modal */}
+                <div className="modal fade" id={author.name + "ModalCenter"} tabIndex="-1" role="dialog" aria-labelledby={author.name + "CenterTitle"} aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id={author.name + "ModalLongTitle"}>{author.name+ " Introduction"}</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                大家都覺得{author.name == "MeteorV Hsu" ? author.name+"像個渣" : author.name+"是大大"}
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" className="btn btn-primary" >讚ㄛ </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </Personal>)
         )
 
