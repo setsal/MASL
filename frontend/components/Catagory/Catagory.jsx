@@ -16,8 +16,8 @@ class SinglePost extends Component {
                     </li>
 
                     {
-                        this.props.KindList.map(function(kind) {
-                            return (<li className="nav-item">
+                        this.props.KindList.map(function(kind, index) {
+                            return (<li className="nav-item" key={index}>
                                 <a className="nav-link" id="tab2" data-toggle="tab" href="#world-tab-2" role="tab" aria-controls="world-tab-2" aria-selected="false">{kind.name}</a>
                             </li>)
                         })
