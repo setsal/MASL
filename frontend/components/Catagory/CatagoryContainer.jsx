@@ -19,6 +19,16 @@ const Main = styled.main `
 `;
 
 
+const kinds = [
+    { "name": "kind1" },
+    { "name": "kind2" },
+    { "name": "kind3" },
+    { "name": "kind4" },
+];
+
+
+
+
 
 export default class CatagoryContainer extends Component {
 
@@ -33,7 +43,7 @@ export default class CatagoryContainer extends Component {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-12 col-lg-8">
-                            {SinglePost}
+                            <SinglePost KindList = {kinds} />
                         </div>
                         <div className="col-12 col-md-8 col-lg-4">
                             {About}
