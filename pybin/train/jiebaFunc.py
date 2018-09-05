@@ -6,6 +6,7 @@ import sqlite3
 
 stopword_path = "../jieba_dict/stop_words.txt"
 jieba_dict_path = "../jieba_dict/dict.txt.big.txt"
+jieba.analyse.set_stop_words("../jieba_dict/stop_words.txt")
 stopWords = []
 
 # initial stopword
@@ -68,6 +69,7 @@ def getSingleKeywords(data, n):
     keywords = []
     article = ' '.join(data)
     words = jieba.analyse.extract_tags( article, n )
-    remain_words = list(filter(lambda a: a not in stopWords, words))
-    keywords.extend(remain_words)
+    #remain_words = list(filter(lambda a: a not in stopWords, words))
+    #keywords.extend(remain_words)
+    keywords.extend(words)
     return keywords
