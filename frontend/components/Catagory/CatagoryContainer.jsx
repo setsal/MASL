@@ -20,14 +20,12 @@ const Main = styled.main `
 
 
 const kinds = [
+    { "name": "All" },
     { "name": "kind1" },
     { "name": "kind2" },
     { "name": "kind3" },
     { "name": "kind4" },
 ];
-
-
-
 
 
 export default class CatagoryContainer extends Component {
