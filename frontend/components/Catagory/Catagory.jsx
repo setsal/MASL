@@ -11,14 +11,10 @@ class SinglePost extends Component {
                 <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="title">Don't Miss</li>
 
-                    <li className="nav-item">
-                        <a className="nav-link active" id="tab1" data-toggle="tab" href="#world-tab-1" role="tab" aria-controls="world-tab-1" aria-selected="true">All</a>
-                    </li>
-
                     {
                         this.props.KindList.map(function(kind, index) {
                             return (<li className="nav-item" key={index}>
-                                <a className="nav-link" id="tab2" data-toggle="tab" href="#world-tab-2" role="tab" aria-controls="world-tab-2" aria-selected="false">{kind.name}</a>
+                                <a className="nav-link" id="tab2" data-toggle="tab" href={'#world-tab-' + index } role="tab" aria-controls="world-tab-2" aria-selected="false">{kind.name}</a>
                             </li>)
                         })
                     }
@@ -26,7 +22,7 @@ class SinglePost extends Component {
 
                 <div className="tab-content" id="myTabContent">
 
-                    <div className="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
+                    <div className="tab-pane fade show active" id="world-tab-0" role="tabpanel" aria-labelledby="tab0">
 
                         <div className="single-blog-post post-style-4 d-flex align-items-center">
 
@@ -42,7 +38,7 @@ class SinglePost extends Component {
 
                                 <div className="post-meta">
                                     <p>
-                                        <a href="#" className="post-author">Artist</a>
+                                        <a href="#" className="post-author">Artist1</a>
                                         on
                                         <a href="#" className="post-date">Timestamp</a>
                                     </p>
@@ -64,7 +60,7 @@ class SinglePost extends Component {
 
                                 <div className="post-meta">
                                     <p>
-                                        <a href="#" className="post-author">Artist</a>
+                                        <a href="#" className="post-author">Artist2</a>
                                         on
                                         <a href="#" className="post-date">Timestamp</a>
                                     </p>
@@ -74,7 +70,7 @@ class SinglePost extends Component {
 
                     </div>
 
-                    <div className="tab-pane fade" id="world-tab-2" role="tabpanel" aria-labelledby="tab2">
+                    <div className="tab-pane fade" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
 
                         <div className="single-blog-post post-style-4 d-flex align-items-center">
 
@@ -90,7 +86,7 @@ class SinglePost extends Component {
 
                                 <div className="post-meta">
                                     <p>
-                                        <a href="#" className="post-author">Artist</a>
+                                        <a href="#" className="post-author">Artist3</a>
                                         on
                                         <a href="#" className="post-date">Timestamp</a>
                                     </p>
@@ -112,7 +108,7 @@ class SinglePost extends Component {
 
                                 <div className="post-meta">
                                     <p>
-                                        <a href="#" className="post-author">Artist</a>
+                                        <a href="#" className="post-author">Artist4</a>
                                         on
                                         <a href="#" className="post-date">Timestamp</a>
                                     </p>
@@ -137,7 +133,7 @@ class SinglePost extends Component {
 
                                 <div className="post-meta">
                                     <p>
-                                        <a href="#" className="post-author">Artist</a>
+                                        <a href="#" className="post-author">Artist5</a>
                                         on
                                         <a href="#" className="post-date">Timestamp</a>
                                     </p>
@@ -159,7 +155,7 @@ class SinglePost extends Component {
 
                                 <div className="post-meta">
                                     <p>
-                                        <a href="#" className="post-author">Artist</a>
+                                        <a href="#" className="post-author">Artist6</a>
                                         on
                                         <a href="#" className="post-date">Timestamp</a>
                                     </p>
@@ -184,7 +180,7 @@ class SinglePost extends Component {
 
                                 <div className="post-meta">
                                     <p>
-                                        <a href="#" className="post-author">Artist</a>
+                                        <a href="#" className="post-author">Artist7</a>
                                         on
                                         <a href="#" className="post-date">Timestamp</a>
                                     </p>
@@ -206,7 +202,7 @@ class SinglePost extends Component {
 
                                 <div className="post-meta">
                                     <p>
-                                        <a href="#" className="post-author">Artist</a>
+                                        <a href="#" className="post-author">Artist8</a>
                                         on
                                         <a href="#" className="post-date">Timestamp</a>
                                     </p>
