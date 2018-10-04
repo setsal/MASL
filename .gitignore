@@ -13,3 +13,4 @@ pybin/train/-Similarity-index*
 webpack-stats-local.json
 .vscode
 package-lock.json
+.env
