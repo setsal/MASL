@@ -15,7 +15,10 @@ fanpage_dict =  [
 
 ### Our FB access token ###
 
-bot_token = 'EAAMsLVshZCncBANlNtqVaPmb8OgwQ5W0wCYkZCh3cPfpr5UwW1Gz4hdTZBos69TW6aphwhlx0FtO9JIpBo1sPxGW3M5uP7urvRSa5SXZCgAn1yvySkZCjxiiLfKqU9AlbNa0RnQB3nOyBJYHkScPPvvN37tMPmCIZD'
+with open('token.txt') as f:
+	token = f.read()
+f.close()
+bot_token = token
 FF_proj_token = 'EAANkhTurUYMBADOTtlQTZAr9pFfTe6dr9JXtm6kOgFRZC40VJN7L6KsMjJe8AgUClg45kV1Bv4sFc8ARdGaboYtRxAizQ0UCBbZA2uzXqnKZCqDiaQFI9zQkDWeuJR9PEzbZCaHTT2g9erOXGVa2But9Fr7uwJGunJ9p4xAFVMQZDZD'
 
 def set_parameter(fanpage_id):
@@ -62,17 +65,18 @@ def print_all_post():
 			all_article_info.append(tmp_dict)
 		#input()
 		timeout += 1 
-		if timeout > 5:
+		if timeout > 15:
 			insert_data("fb_fetch_article", all_article_info)
 			timeout = 1
 			all_article_info=[]
+			input()
 					
 	#return all_article_info
 
 
 
 def main():
-	print(print_all_post())
+	print_all_post()
 	#insert_data("fb_fetch_article", print_all_post())
 
 

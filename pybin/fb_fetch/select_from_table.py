@@ -79,7 +79,7 @@ def insert_data(table_name,input_arr):
 		print(post,"\n\n")
 		if 'cid' in post.keys():
 			conn.execute(
-				"insert into fb_fetch_article ( cid, textid, content, created_at ) values(?,?,?,?) ", post['cid'], post['textid'], post['content'], post['created_at'] )				
+				"insert into fb_fetch_article ( cid, textid, content, created_at ) values(?,?,?,?) ", (post['cid'], post['textid'], post['content'], post['created_at']) )				
 				#"insert into fb_fetch_article ( cid, textid, content, created_at ) values('{}','{}','{}','{}');".format( post['cid'], post['textid'], post['content'], post['created_at']) )
 			conn.commit()
 
