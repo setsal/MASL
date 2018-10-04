@@ -9,6 +9,7 @@ pybin/train/output/
 pybin/train/input/
 pybin/word_cloud/output/
 pybin/word_cloud/input/
+pybin/fb_fetch/token.txt
 pybin/train/-Similarity-index*
 webpack-stats-local.json
 .vscode

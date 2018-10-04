@@ -4,7 +4,6 @@ import json
 import sys
 import io
 from dateutil.parser import parse
-from crawler_and_insert import *
 ### config ###
 
 target_fanpage = ""
@@ -16,7 +15,7 @@ fanpage_dict =  [
 	{'id':'monsterhunter','name':'monsterhunter'},{'id':'shaochienmagic','name':'shaochienmagic'},{'id':'PlayStationTaiwan','name':'PlayStationTaiwan'} ]
 
 
-bot_token = 'EAACEdEose0cBACWlPQ8ZBWSDryqkmRx0powqCNrtwmIfEXEXc5BBIfUt5MBJwHfjeBnRwPZADqgBq7P3I9obTCOdAqbyFtE17mDnGrIBDJkPMUV5QbzyomJFIkaNXfFdabjJZCtls0H8ky7Ns8ajhGtLZBDCzGYek6ikuZAjkK1Pu5C2TZAI3o6s7lMtZBRmwsZD'
+bot_token = 'EAAMsLVshZCncBANlNtqVaPmb8OgwQ5W0wCYkZCh3cPfpr5UwW1Gz4hdTZBos69TW6aphwhlx0FtO9JIpBo1sPxGW3M5uP7urvRSa5SXZCgAn1yvySkZCjxiiLfKqU9AlbNa0RnQB3nOyBJYHkScPPvvN37tMPmCIZD'
 FF_proj_token = 'EAANkhTurUYMBADOTtlQTZAr9pFfTe6dr9JXtm6kOgFRZC40VJN7L6KsMjJe8AgUClg45kV1Bv4sFc8ARdGaboYtRxAizQ0UCBbZA2uzXqnKZCqDiaQFI9zQkDWeuJR9PEzbZCaHTT2g9erOXGVa2But9Fr7uwJGunJ9p4xAFVMQZDZD'
 
 ### function ###
@@ -90,5 +89,5 @@ def test_sql():
 
 
 ### main
-#print_all_post()
-test_sql()
+print_all_post()
+#test_sql()
