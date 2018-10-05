@@ -4,6 +4,9 @@ import json
 import sys
 import io
 from dateutil.parser import parse
+from dotenv import find_dotenv, load_dotenv
+load_dotenv(find_dotenv())
+
 ### config ###
 
 target_fanpage = ""
@@ -15,7 +18,7 @@ fanpage_dict =  [
 	{'id':'monsterhunter','name':'monsterhunter'},{'id':'shaochienmagic','name':'shaochienmagic'},{'id':'PlayStationTaiwan','name':'PlayStationTaiwan'} ]
 
 
-bot_token = 'EAAMsLVshZCncBANlNtqVaPmb8OgwQ5W0wCYkZCh3cPfpr5UwW1Gz4hdTZBos69TW6aphwhlx0FtO9JIpBo1sPxGW3M5uP7urvRSa5SXZCgAn1yvySkZCjxiiLfKqU9AlbNa0RnQB3nOyBJYHkScPPvvN37tMPmCIZD'
+bot_token = os.getenv('FB_TOKEN')
 FF_proj_token = 'EAANkhTurUYMBADOTtlQTZAr9pFfTe6dr9JXtm6kOgFRZC40VJN7L6KsMjJe8AgUClg45kV1Bv4sFc8ARdGaboYtRxAizQ0UCBbZA2uzXqnKZCqDiaQFI9zQkDWeuJR9PEzbZCaHTT2g9erOXGVa2But9Fr7uwJGunJ9p4xAFVMQZDZD'
 
 ### function ###

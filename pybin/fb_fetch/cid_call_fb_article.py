@@ -2,7 +2,10 @@ import requests
 import pandas as pd
 import json
 import sys
+import os
 import io
+from dotenv import find_dotenv, load_dotenv
+load_dotenv(find_dotenv())
 
 from select_from_table import * 
 
@@ -14,11 +17,7 @@ fanpage_dict =  [
 	{'id':'monsterhunter','name':'monsterhunter'},{'id':'shaochienmagic','name':'shaochienmagic'},{'id':'PlayStationTaiwan','name':'PlayStationTaiwan'} ]
 
 ### Our FB access token ###
-
-with open('token.txt') as f:
-	token = f.read()
-f.close()
-bot_token = token
+bot_token = os.getenv('FB_TOKEN')
 FF_proj_token = 'EAANkhTurUYMBADOTtlQTZAr9pFfTe6dr9JXtm6kOgFRZC40VJN7L6KsMjJe8AgUClg45kV1Bv4sFc8ARdGaboYtRxAizQ0UCBbZA2uzXqnKZCqDiaQFI9zQkDWeuJR9PEzbZCaHTT2g9erOXGVa2But9Fr7uwJGunJ9p4xAFVMQZDZD'
 
 def set_parameter(fanpage_id):
@@ -76,7 +75,8 @@ def print_all_post():
 
 
 def main():
-	print_all_post()
+	print(bot_token)
+	#print_all_post()
 	#insert_data("fb_fetch_article", print_all_post())
 
 
