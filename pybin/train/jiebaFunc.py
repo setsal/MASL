@@ -3,6 +3,7 @@
 
 import jieba.analyse
 import sqlite3
+import re
 
 stopword_path = "../jieba_dict/stop_words.txt"
 jieba_dict_path = "../jieba_dict/dict.txt.big.txt"
@@ -21,8 +22,11 @@ def init_stopword():
 def getArticle():
     data = []
     conn = sqlite3.connect('../../db.sqlite3')
+    r = u'[0-9’!＆"#$%&\'()*+,-.／:;<=>?@⚠🙏😂，。?★、…【】《》？“”‘’！[\\]^_`{|}~]+'
     for row in conn.execute('SELECT id, content FROM fb_fetch_article'):
-        data.append(''.join(row[1].strip('\n').split()))
+        temp = ''.join(row[1].strip('\n').split())
+        temp = re.sub(r, '', temp)
+        data.append(temp)
     return data
 
 # Get sql data by cid
@@ -69,7 +73,7 @@ def getSingleKeywords(data, n):
     keywords = []
     article = ' '.join(data)
     words = jieba.analyse.extract_tags( article, n )
-    #remain_words = list(filter(lambda a: a not in stopWords, words))
-    #keywords.extend(remain_words)
-    keywords.extend(words)
+    remain_words = list(filter(lambda a: a not in stopWords, words))
+    keywords.extend(remain_words)
+    #keywords.extend(words)
     return keywords

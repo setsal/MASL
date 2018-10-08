@@ -22,6 +22,9 @@ return   : integer, the number of row.
 function : count_num_of_cid( table_name , cid )
 return   : integer, the number of cid's article count.
 
+function : select_cid_list_from_table( table_name )
+reutrn   : tuples of list , the all of club's cid.  (Maybe I need to imporve into str of list)
+
 '''
 # =============================
 
@@ -54,6 +57,7 @@ def count_num_of_cid(table_name, cid):
 # test it !
 # print(120909948018734," 's article number is: ", count_num_of_cid("fb_fetch_article", 120909948018734))
 
+
 def select_cid_list_from_table(table_name):
 	cursor = conn.execute(
 		'select cid from {} ;'.format(table_name))
@@ -64,7 +68,6 @@ def select_cid_list_from_table(table_name):
 	for row in cursor:
 		empty_list.append(row)
 		#print("Content : {}\n".format(row[3]))
-	#print("????\n" , empty_list)
 		
 	return empty_list
 
@@ -72,11 +75,24 @@ def select_cid_list_from_table(table_name):
 #print(select_cid_list_from_table("fb_fetch_club"))
 
 
+# 2018/10/05 
+def count_cid_num(table_name):
+	# select cid ,count(cid) from fb_fetch_article group by cid
+	cursor = conn.execute('select cid, count(cid) from {} group by cid'.format(table_name))
+	for row in cursor:
+		print(row)
+	#return cursor
+
+# test it !
+# count_cid_num("fb_fetch_article")
+
+
+
 def insert_data(table_name,input_arr):
 	# DB : id cid textid content created_at
 	
 	for post in input_arr:
-		print(post,"\n\n")
+		#print(post,"\n\n")
 		if 'cid' in post.keys():
 			conn.execute(
 				"insert into fb_fetch_article ( cid, textid, content, created_at ) values(?,?,?,?) ", (post['cid'], post['textid'], post['content'], post['created_at']) )				

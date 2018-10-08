@@ -41,6 +41,8 @@ Reset Migration ( if it is necessary ):
  -  WordCloud Package need Microsoft Visual Studio C++ 14.0 package, you must install it before using.
     1. Install Via Visual Studio
     2. Install Via binary .whl file ( http://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud )
+    3. or you can install in this way : ``py -m pip install ../Some_dir/wordcloud-1.5.0-cp36-cp36m-win_amd64.whl
+``
 
 
 ## Contributors

@@ -22,35 +22,47 @@ def main():
     article_lists = getArticle()
     seg_list = getSegment(article_lists)
 
+    #print(seg_list)
+
 
     # Create dictionary
-    dictionary = corpora.Dictionary(seg_list)
+    #dictionary = corpora.Dictionary(seg_list)
 
 
     # Remove stop words
     # stop_ids = [dictionary.token2id[stopword] for stopword in stopword_set
     #             if stopword in dictionary.token2id]
     # dictionary.filter_tokens(stop_ids)
-    dictionary.compactify()
+    #dictionary.compactify()
 
     # Create dict & list dict word & id
-    dictionary.save("output/0814.dict")
-    logging.info("Create dict success.")
+    #dictionary.save("output/0814.dict")
+    #logging.info("Create dict success.")
 
     """
     for word,index in dictionary.token2id.items():
         print(word +" id:"+ str(index))
     """
 
-    # 移除只出現一次的字詞
+    n = 100
+
+    # 移除只出現n次的字詞
     from collections import defaultdict
     frequency = defaultdict(int)
     for text in seg_list:
         for token in text:
             frequency[token] += 1
 
-    texts = [[token for token in text if frequency[token] > 1]
+    texts = [[token for token in text if frequency[token] > n]
              for text in seg_list]
+
+    # Create dictionary
+    dictionary = corpora.Dictionary(texts)
+    dictionary.compactify()
+    dictionary.save("output/0814.dict")
+    logging.info("Create dict success.")
+
+    print(dictionary.token2id)
 
 
     # Serialize it

@@ -9,7 +9,7 @@ import io
 import os
 sys.path.append('../fb_fetch')
 from select_from_table import cid_to_cname
-from jiebaFunc import getArticleByCid, getSingleKeywords
+from jiebaFunc import getArticleByCid, getSingleKeywords, init_stopword
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
 
@@ -50,23 +50,26 @@ def main():
     else:
         logging.info("Please run the train2.py to create dict & data flow")
 
+    init_stopword()
+
     # Create tf-idf model
     tfidf = models.TfidfModel(corpus)
     corpus_tfidf = tfidf[corpus]
 
-    num_topic = 8
+    num_topic = 7
 
     # Transfer to LSI model
-    lsi = models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=num_topic)
-    corpus_lsi = lsi[corpus_tfidf]
+    lda = models.LdaModel(corpus_tfidf, id2word=dictionary, num_topics=num_topic, iterations=100, passes=20)
+    corpus_lda = lda[corpus_tfidf]
 
     # Get nearest topic for each article
     topic_list = []
     topic_list_test = []
     index = 0
-    for doc in corpus_lsi:
+    for doc in corpus_lda:
         #print(str(index) + ':' + str(my_absmax(doc)))
         #index = index + 1
+        #print(doc)
         topic_list.append(my_absmax(doc))
         topic_list_test.append(my_absmax_for_test(doc))
     #print('==================================')
@@ -77,28 +80,30 @@ def main():
     conn = sqlite3.connect('../../db.sqlite3')
 
     cid_list = []
-    for row in conn.execute('select min(id), max(id), cid from fb_fetch_article GROUP BY cid'):
+    for row in conn.execute('select min(cast(id as INT)), max(cast(id as INT)), cid from fb_fetch_article GROUP BY cid'):
         cid_list.append(row)
 
     topic_cid = [[None for col in range(0)] for row in range(num_topic)]
     for row in cid_list:
-        start = row[0] - 1
-        end = row[1]
-        #print(str(row[2]) + ':' + str(topic_list[start:end]))
+        start = int(row[0]) - 1
+        end = int(row[1])
+        #print(str(start) + ',' + str(end))
+        #print(row[2] + ':' + str(topic_list[start:end]))
         num = max(topic_list[start:end], key=topic_list[start:end].count)
         #print(cid_to_cname('fb_fetch_club', row[2]) + ':' + 'Topic' + str(num + 1))
         #print('\n')
         topic_cid[num].append(row[2])
 
-    count = 1
-    for topic in topic_cid:
-        text = []
-        for cid in topic:
-            data = getArticleByCid(cid)
-            text = text + data
-        tags = getSingleKeywords(text, 3)
-        print('Topic' + str(count) + ':' + str(tags))
-        count = count + 1
+    for n in range(num_topic):
+        print('Topic' + str(n) + ':')
+        for cid in topic_cid[n]:
+            print(cid_to_cname('fb_fetch_club', cid))
+        print('\n')
+
+    
+    for i in range(0, lda.num_topics-1):
+        print(lda.print_topic(i))
+
     # ==============================
     """
 
@@ -119,9 +124,9 @@ def main():
     
     for i in range(num_topic):
         print("*********************************************************************")
-        print("Topic" + str(i + 1) + ":")
+        print("Topic" + str(i) + ":")
         for id in topic_list_sort_by_topic[i]:
-            print(articles[id])
+            print(articles[id][:20])
     
     # =================================
     
