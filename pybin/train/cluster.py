@@ -56,7 +56,7 @@ def main():
     tfidf = models.TfidfModel(corpus)
     corpus_tfidf = tfidf[corpus]
 
-    num_topic = 5
+    num_topic = 7
 
     # Transfer to LSI model
     lda = models.LdaModel(corpus_tfidf, id2word=dictionary, num_topics=num_topic, iterations=100, passes=20)
@@ -74,12 +74,13 @@ def main():
         topic_list_test.append(my_absmax_for_test(doc))
     #print('==================================')
 
+    """
     # ======= topic of clubs =======
     # Connect to db and print the article by id
     conn = sqlite3.connect('../../db.sqlite3')
 
     cid_list = []
-    for row in conn.execute('select  min(cast(id as INT)), max(cast(id as INT)), cid from fb_fetch_article GROUP BY cid'):
+    for row in conn.execute('select min(cast(id as INT)), max(cast(id as INT)), cid from fb_fetch_article GROUP BY cid'):
         cid_list.append(row)
 
     topic_cid = [[None for col in range(0)] for row in range(num_topic)]
@@ -103,21 +104,10 @@ def main():
     for i in range(0, lda.num_topics-1):
         print(lda.print_topic(i))
 
-    """
-    count = 1
-    for topic in topic_cid:
-        text = []
-        for cid in topic:
-            data = getArticleByCid(cid)
-            text = text + data
-        tags = getSingleKeywords(text, 10)
-        print('Topic' + str(count) + ':' + str(tags))
-        count = count + 1
-    """
     # ==============================
-    
-
     """
+
+    
     # ======= topic of articles ========
     # Connect to db and print the article by id
     conn = sqlite3.connect('../../db.sqlite3')
@@ -134,12 +124,12 @@ def main():
     
     for i in range(num_topic):
         print("*********************************************************************")
-        print("Topic" + str(i + 1) + ":")
+        print("Topic" + str(i) + ":")
         for id in topic_list_sort_by_topic[i]:
-            print(articles[id])
+            print(articles[id][:20])
     
     # =================================
-    """
+    
     
 
 if __name__ == "__main__":

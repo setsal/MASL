@@ -44,7 +44,7 @@ def main():
         print(word +" id:"+ str(index))
     """
 
-    n = 30
+    n = 100
 
     # 移除只出現n次的字詞
     from collections import defaultdict
