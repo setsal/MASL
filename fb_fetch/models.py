@@ -7,6 +7,7 @@ class article(models.Model):
     content = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
 
+
 # Club Model
 class club(models.Model):
     cid = models.CharField(max_length=30)

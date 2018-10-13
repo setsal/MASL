@@ -17,10 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views import generic
 from rest_framework.routers import DefaultRouter
-from fb_fetch import views
+from fb_fetch import views as fb_fetch_views
 
 router = DefaultRouter()
-router.register(r'fb_fetch', views.Fb_fetchViewSet)
+router.register(r'fb_fetch', fb_fetch_views.Fb_fetchViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +28,6 @@ urlpatterns = [
     path('', generic.TemplateView.as_view(template_name='view1.html')),
     path('about/', generic.TemplateView.as_view(template_name='view1.html')),
     path('catagory/', generic.TemplateView.as_view(template_name='view1.html')),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('cluster/', fb_fetch_views.index),
 ]

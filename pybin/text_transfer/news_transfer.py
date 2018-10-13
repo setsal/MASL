@@ -14,8 +14,8 @@ conn = sqlite3.connect('../../db.sqlite3') #連結指定的資料庫
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
 
 # insert to sql
-def insert_data( fanpage_id, contents ):
-    conn.execute("insert into fb_fetch_article ( cid, textid, content, created_at ) values( ?, ?, ?, ? )", ( fanpage_id, "1234", contents, datetime.datetime.now()) )
+def insert_data( title, contents ):
+    conn.execute("insert into fb_fetch_article ( cid, textid, content, created_at ) values( ?, ?, ?, ? )", ( "unknown", title, contents, datetime.datetime.now()) )
     conn.commit()
 
 # Read file
@@ -27,16 +27,23 @@ def readfile(filename):
     cnt = 0
     # generate array list
     for i in range( len(lines) ):
+        content = ''
+        title = ''
+        if i%5 == 2:
+            title = lines[i][3:]
+            print(title)
+
         if i%5 == 4:
             cnt = cnt + 1
             news = lines[i].lstrip()
             if not news:
                 continue
             start = news.find('報導') + 3
-
+            content = news[start:]
             # add to sql
-            logging.info("嘗試新增第 %d 篇新聞" % cnt )
-            insert_data( "unknown", news[start:] )
+            #logging.info("嘗試新增第 %d 篇新聞" % cnt )
+            print(title)
+            #insert_data( title, content )
 
 
 
@@ -47,7 +54,7 @@ def main():
 
     if len(sys.argv) < 2:
         logging.error("No argument")
-        logging.info("Usage: $python tranfer.py [filename1] [filename2] [filename3]")
+        logging.info("Usage: $python news_tranfer.py [filename]")
         logging.info("Btw, *.txt also work.")
         sys.exit()
 
