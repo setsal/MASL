@@ -36,7 +36,7 @@ def getCluster():
         corpus = corpora.MmCorpus("pybin/train/output/0814.mm")
         logging.info("Load model success")
     else:
-        logging.info("Please run the train2.py to create dict & data flow")
+        logging.info("Please run the train2.py to create models")
 
     # Load tf-idf model
     tfidf = models.TfidfModel.load("pybin/train/output/1011.tfidf")

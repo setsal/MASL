@@ -6,7 +6,7 @@
 import logging
 import jieba
 import gensim
-from gensim import corpora
+from gensim import corpora, models
 import sys
 import io
 from jiebaFunc import init_stopword, getArticle, getSegment
@@ -70,6 +70,18 @@ def main():
     corpora.MmCorpus.serialize("output/0814.mm", corpus)
     logging.info("Create data flow success.")
 
+
+    tfidf = models.TfidfModel(corpus)
+    tfidf.save("output/1011.tfidf")
+    corpus_tfidf = tfidf[corpus]
+    logging.info("Create TF-IDF model success.")
+
+    num_topic = 7
+
+    # Transfer to LSI model
+    lda = models.LdaModel(corpus_tfidf, id2word=dictionary, num_topics=num_topic, iterations=100, passes=20)
+    lda.save("output/1011.lda")
+    logging.info("Create LDA model success.")
 
 
 if __name__ == "__main__":
