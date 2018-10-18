@@ -36,6 +36,7 @@ const Personal = styled.div`
         max-width: 20rem;
         font-size: 16px;
     }
+    cursor: pointer;
 `
 const Jumbotron = styled.section`
     text-align: center;
@@ -126,7 +127,7 @@ export default class About extends Component {
                         <div className="row">
                             <div className="col-xxs-12 col-lg-10 mx-auto">
                                 <div className="row">
-                                    <a href="" className="custom-card" onMouseEnter={this.toggleHover}>
+                                    {/* <a href="" className="custom-card" onMouseEnter={this.toggleHover}> */}
                                     <section className="card card-lg p-b-0 text-xxs-center" id="about-leadership">
                                         <h2>Leadership</h2>
 
@@ -135,7 +136,7 @@ export default class About extends Component {
                                         </div>
 
                                     </section>
-                                    </a>
+                                    {/* </a> */}
 
                                 </div>
                             </div>
