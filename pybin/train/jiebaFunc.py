@@ -19,11 +19,11 @@ def init_stopword():
 
 
 # Get sql data
-def getArticle():
+def getArticle(table_name):
     data = []
     conn = sqlite3.connect('../../db.sqlite3')
     r = u'[0-9’!＆"#$%&\'()*+,-.／:;<=>?@⚠🙏😂，。?★、…【】《》？“”‘’！[\\]^_`{|}~]+'
-    for row in conn.execute('SELECT id, content FROM fb_fetch_article'):
+    for row in conn.execute('SELECT id, content FROM {}'.format(table_name)):
         temp = ''.join(row[1].strip('\n').split())
         temp = re.sub(r, '', temp)
         data.append(temp)

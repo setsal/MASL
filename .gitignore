@@ -2,9 +2,6 @@
 db.sqlite3
 db.sqlite3-journal
 node_modules
-pybin/nlp/dict.txt.big.txt
-pybin/nlp/stop_words.txt
-pybin/nlp/test.txt
 pybin/jieba_dict/
 pybin/train/output/
 pybin/train/input/
@@ -17,3 +14,4 @@ webpack-stats-local.json
 .vscode
 package-lock.json
 .env
+pybin/media/db_modify/json/
