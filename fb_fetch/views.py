@@ -7,7 +7,7 @@ from fb_fetch.serializers import FB_fetchSerializer
 
 from rest_framework import viewsets
 
-from pybin.train import cluster_simple
+from pybin.train import cluster_fb
 
 # Create your views here.
 class Fb_fetchViewSet(viewsets.ModelViewSet):
@@ -15,7 +15,7 @@ class Fb_fetchViewSet(viewsets.ModelViewSet):
     serializer_class = FB_fetchSerializer
 
 def index(request):
-    data = cluster_simple.getCluster()
+    data = cluster_fb.getCluster()
 
     #word = cluster_simple.getCluster()
     return JsonResponse(data, safe=False)

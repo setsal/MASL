@@ -31,22 +31,22 @@ def my_absmax(sequence):
 def getCluster():
     logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
 
-    if ( os.path.exists("pybin/train/output/0814.dict") ):
-        dictionary = corpora.Dictionary.load("pybin/train/output/0814.dict")
-        corpus = corpora.MmCorpus("pybin/train/output/0814.mm")
+    if ( os.path.exists("pybin/train/output/fb.dict") ):
+        dictionary = corpora.Dictionary.load("pybin/train/output/fb.dict")
+        corpus = corpora.MmCorpus("pybin/train/output/fb.mm")
         logging.info("Load model success")
     else:
         logging.info("Please run the train2.py to create models")
 
     # Load tf-idf model
-    tfidf = models.TfidfModel.load("pybin/train/output/1011.tfidf")
+    tfidf = models.TfidfModel.load("pybin/train/output/fb.tfidf")
     corpus_tfidf = tfidf[corpus]
 
 
     num_topic = 7
 
     # Load to LDA model
-    lda = models.LdaModel.load("pybin/train/output/1011.lda")
+    lda = models.LdaModel.load("pybin/train/output/fb.lda")
     corpus_lda = lda[corpus_tfidf]
 
     # Get nearest topic for each article

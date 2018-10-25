@@ -26,13 +26,12 @@ def readfile(filename):
 
     cnt = 0
     # generate array list
+
+    title = ''
     for i in range( len(lines) ):
         content = ''
-        title = ''
         if i%5 == 2:
             title = lines[i][3:]
-            print(title)
-
         if i%5 == 4:
             cnt = cnt + 1
             news = lines[i].lstrip()
@@ -40,10 +39,12 @@ def readfile(filename):
                 continue
             start = news.find('報導') + 3
             content = news[start:]
+
             # add to sql
-            #logging.info("嘗試新增第 %d 篇新聞" % cnt )
-            print(title)
-            #insert_data( title, content )
+            logging.info("嘗試新增第 %d 篇新聞" % cnt )
+            #print(title)
+            #print(content)
+            insert_data( title, content )
 
 
 
