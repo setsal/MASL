@@ -19,8 +19,15 @@ def main():
     logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
 
     init_stopword()
-    article_lists = getArticle()
+    article_lists = getArticle("fb_fetch_article")
     seg_list = getSegment(article_lists)
+
+    filt_list = [[y for y in x if y.startswith(('FGO','fgo','少女前線','白貓','寫真','cosplay','cos','東方','演唱會','百合','艦娘','血小板','碧藍','偶像','音樂'))] for x in seg_list]
+
+    #print(filt_list)
+
+    #'FGO' or 'fgo' or '少女前線' or '白貓' or '寫真' or 'cosplay' or '東方' or '演唱會' or '百合' or '艦娘' or '血小板' or '碧藍' or '偶像' or '音樂' 
+    #'FGO','fgo','少女前線','白貓','寫真','cosplay','東方','演唱會','百合','艦娘','血小板','碧藍','偶像','音樂'
 
     #print(seg_list)
 
@@ -44,7 +51,7 @@ def main():
         print(word +" id:"+ str(index))
     """
 
-    n = 100
+    n = 1
 
     # 移除只出現n次的字詞
     from collections import defaultdict
@@ -59,7 +66,7 @@ def main():
     # Create dictionary
     dictionary = corpora.Dictionary(texts)
     dictionary.compactify()
-    dictionary.save("output/0814.dict")
+    dictionary.save("output/fb.dict")
     logging.info("Create dict success.")
 
     print(dictionary.token2id)
@@ -67,12 +74,12 @@ def main():
 
     # Serialize it
     corpus = [dictionary.doc2bow(text) for text in texts]
-    corpora.MmCorpus.serialize("output/0814.mm", corpus)
+    corpora.MmCorpus.serialize("output/fb.mm", corpus)
     logging.info("Create data flow success.")
 
 
     tfidf = models.TfidfModel(corpus)
-    tfidf.save("output/1011.tfidf")
+    tfidf.save("output/fb.tfidf")
     corpus_tfidf = tfidf[corpus]
     logging.info("Create TF-IDF model success.")
 
@@ -80,7 +87,7 @@ def main():
 
     # Transfer to LSI model
     lda = models.LdaModel(corpus_tfidf, id2word=dictionary, num_topics=num_topic, iterations=100, passes=20)
-    lda.save("output/1011.lda")
+    lda.save("output/fb.lda")
     logging.info("Create LDA model success.")
 
 

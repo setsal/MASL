@@ -34,26 +34,7 @@ const kinds = [
                 "content": "topic0-Content1"
             },
         ]
-    },
-    {
-      "kind": "topic1",
-      "articles":
-        [
-            {
-              "title": "topic1-Title0",
-              "content": "topic1-Content0"
-            },
-            {
-                "title": "topic1-Title1",
-                "content": "topic1-Content1"
-            },
-            {
-                "title": "topic1-Title1",
-                "content": "topic1-Content1"
-            },
-        ]
     }
-
 ];
 
 
@@ -74,7 +55,7 @@ export default class CatagoryContainer extends Component {
       })
       */
       try {
-        const res = await fetch('http://localhost:8000/cluster/');
+        const res = await fetch('http://localhost:8000/fb_cluster/');
         const topics = await res.json();
         this.setState({
           topics

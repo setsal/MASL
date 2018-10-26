@@ -59,8 +59,10 @@ def getCluster():
     # Connect to db and print the article by id
     conn = sqlite3.connect('db.sqlite3')
     articles = []
-    for row in conn.execute('SELECT id, content FROM fb_fetch_article'):
-        articles.append(row[1])
+    titles = []
+    for row in conn.execute('SELECT id, textid, content FROM fb_fetch_article'):
+        articles.append(row[2])
+        titles.append(row[1])
 
     # Sort by topic
     topic_list_sort_by_topic = []
@@ -82,7 +84,7 @@ def getCluster():
             if idx > 20:
                 break
             single_post = {
-                'title': 'unknown',
+                'title': titles[id],
                 'content': articles[id][:30]
             }
             contents.append(single_post)
@@ -98,5 +100,6 @@ def getCluster():
 
 
 
-# if __name__ == "__main__":
-# 	main()
+#if __name__ == "__main__":
+    #cluster = getCluster()
+    #print(cluster)

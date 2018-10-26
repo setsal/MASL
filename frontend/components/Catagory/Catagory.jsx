@@ -4,7 +4,7 @@ import '../../dist/catagory.css';
 import bg1 from '../../dist/img/blog-img/bg1.png';
 
 const SinglePost = ({topics}) => {
-    console.log(topics);
+    
     const topicTabs = topics.map((topic, index) => {
         return (<li className="nav-item" key={index}>
             <a className="nav-link" id="tab2" data-toggle="tab" href={'#world-tab-' + index} role="tab" aria-controls="world-tab-2" aria-selected="false">{topic.kind}</a>
