@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import '../../dist/catagory.css';
-import bg1 from '../../dist/img/blog-img/bg1.png';
+import '../../../dist/catagory.css';
+import bg1 from '../../../dist/img/blog-img/bg1.png';
 
 const SinglePost = ({topics}) => {
 
@@ -28,9 +28,9 @@ const SinglePost = ({topics}) => {
 
                             <div className="post-meta">
                                 <p>
-                                    <a href="#" className="post-author">Artist1&nbsp;</a>
-                                    on
-                                    <a href="#" className="post-date">&nbsp;Timestamp</a>
+                                    <a href="#" className="post-author">{d.company}&nbsp;</a>
+                                    -
+                                    <a href="#" className="post-date">&nbsp;{d.category}</a>
                                 </p>
                             </div>
                         </div>
@@ -53,9 +53,9 @@ const SinglePost = ({topics}) => {
 
                             <div className="post-meta">
                                 <p>
-                                    <a href="#" className="post-author">Artist1</a>
-                                    on
-                                    <a href="#" className="post-date">Timestamp</a>
+                                    <a href="#" className="post-author">{d.company}&nbsp;</a>
+                                    -
+                                    <a href="#" className="post-date">&nbsp;{d.category}</a>
                                 </p>
                             </div>
                         </div>

@@ -31,6 +31,7 @@ export default class Nav extends React.Component {
                                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <a className="dropdown-item" href="/">Home</a>
                                                 <a className="dropdown-item" href="/catagory">Catagory</a>
+                                                <a className="dropdown-item" href="/newscatagory">NewsCatagory</a>
                                             </div>
                                         </li>
                                         <li className="nav-item">

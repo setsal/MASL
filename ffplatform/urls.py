@@ -29,6 +29,7 @@ urlpatterns = [
     path('', generic.TemplateView.as_view(template_name='view1.html')),
     path('about/', generic.TemplateView.as_view(template_name='view1.html')),
     path('catagory/', generic.TemplateView.as_view(template_name='view1.html')),
+    path('newscatagory/', generic.TemplateView.as_view(template_name='view1.html')),
     path('api/', include(router.urls)),
     path('fb_cluster/', fb_fetch_views.index),
     path('news_cluster/', media_fetch_views.index),

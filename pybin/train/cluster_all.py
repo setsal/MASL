@@ -113,7 +113,7 @@ def getNewsCluster():
     corpus_tfidf = tfidf[corpus]
 
 
-    num_topic = 7
+    num_topic = 5
 
     # Load to LDA model
     lda = models.LdaModel.load("pybin/train/output/news.lda")
@@ -158,7 +158,7 @@ def getNewsCluster():
             if idx > 20:
                 break
             single_post = {
-                'categories': categories[id],
+                'category': categories[id],
                 'title': titles[id],
                 'content': articles[id][:30],
                 'company': companys[id]
