@@ -22,7 +22,7 @@ def main():
     article_lists = getArticle("media_fetch_news")
     seg_list = getSegment(article_lists)
 
-    n = 100
+    n = 20
 
     # 移除只出現n次的字詞
     from collections import defaultdict
@@ -52,7 +52,7 @@ def main():
     corpus_tfidf = tfidf[corpus]
     logging.info("Create TF-IDF model success.")
 
-    num_topic = 7
+    num_topic = 5
 
     # Transfer to LSI model
     lda = models.LdaModel(corpus_tfidf, id2word=dictionary, num_topics=num_topic, iterations=100, passes=20)
