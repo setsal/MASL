@@ -59,9 +59,11 @@ def getFbCluster():
     conn = sqlite3.connect('db.sqlite3')
     articles = []
     titles = []
-    for row in conn.execute('SELECT id, textid, content FROM fb_fetch_article'):
-        articles.append(row[2])
-        titles.append(row[1])
+    clubs_id = []
+    for row in conn.execute('SELECT fb_fetch_article.id, fb_fetch_article.content, fb_fetch_club.name, fb_fetch_club.id FROM fb_fetch_article INNER JOIN fb_fetch_club ON fb_fetch_club.cid = fb_fetch_article.cid'):
+        articles.append(row[1])
+        titles.append(row[2])
+        clubs_id.append(row[3])
 
     # Sort by topic
     topic_list_sort_by_topic = []
@@ -71,11 +73,10 @@ def getFbCluster():
 
     data = []
     topic = {}
-
+    keyword_of_topic = []
 
     for i in range(num_topic):
         n_topic = "Topic" + str(i)
-
 
         contents = []
         idx = 0
@@ -84,13 +85,22 @@ def getFbCluster():
                 break
             single_post = {
                 'title': titles[id],
-                'content': articles[id][:30]
+                'content': articles[id],
+                'clubs_id': clubs_id[id]
             }
             contents.append(single_post)
             idx = idx + 1
 
+
+        key_list = lda.show_topic(i, topn=10)
+        temp = []
+        for tup in key_list:
+            temp.append(tup[0])
+        keyword_of_topic.append(temp)
+
         topic = {
             'kind': n_topic,
+            'keyword_of_topic': keyword_of_topic,
             'articles': contents
         }
         data.append(topic)
@@ -160,7 +170,7 @@ def getNewsCluster():
             single_post = {
                 'category': categories[id],
                 'title': titles[id],
-                'content': articles[id][:30],
+                'content': articles[id],
                 'company': companys[id]
             }
             contents.append(single_post)

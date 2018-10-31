@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import '../../dist/catagory.css';
 import SinglePost, { About, HotArticle } from './Catagory'
-
+import Modal from "react-responsive-modal";
 
 const Main = styled.main `
     padding: 36px 0 47px;
@@ -17,46 +17,33 @@ const Main = styled.main `
     .container {
         margin-top: 80px;
     }
-`;
-
-
-const kinds = [
-    {
-      "kind": "topic0",
-      "articles":
-        [
-            {
-              "title": "topic0-Title0",
-              "content": "topic0-Content0"
-            },
-            {
-                "title": "topic0-Title1",
-                "content": "topic0-Content1"
-            },
-        ]
+    .single_post {
+        text-align: left;
+        white-space: pre-line;
     }
-];
+
+`;
 
 
 export default class CatagoryContainer extends Component {
     constructor(props) {
       super(props);
+
         this.state = {
             topics: [],
+            content: [],
+            title: [],
+            open: false,
         };
+
+        this.onOpenModal = this.onOpenModal.bind(this);
     }
 
     async componentDidMount() {
-      /*
-      axios.get('http://localhost:8000/getCluster/')
-      .then( res => {
-          const articles = res.data;
-          this.setState({ articles });
-      })
-      */
       try {
         const res = await fetch('http://localhost:8000/fb_cluster/');
         const topics = await res.json();
+        console.log(topics)
         this.setState({
           topics
         });
@@ -65,7 +52,22 @@ export default class CatagoryContainer extends Component {
       }
     }
 
+    onOpenModal(letter, letter2) {
+      this.setState ({
+          open: true,
+          content: letter,
+          title: letter2
+      });
+    }
+
+    onCloseModal = () => {
+      this.setState({ open: false });
+    }
+
+
     render() {
+        const { open } = this.state;
+
         return (
             <div style={{
                 'backgroundColor' : '#fff'
@@ -76,7 +78,14 @@ export default class CatagoryContainer extends Component {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-12 col-lg-8">
-                            <SinglePost topics={this.state.topics} />
+                            <div className="single_post">
+                            <SinglePost
+                                topics={this.state.topics}
+                                open={this.state.open}
+                                onOpenModal={this.onOpenModal}
+                                onCloseModal={this.onCloseModal}
+                            />
+                            </div>
                         </div>
                         <div className="col-12 col-md-8 col-lg-4">
                             {About}
@@ -84,6 +93,12 @@ export default class CatagoryContainer extends Component {
                         </div>
                     </div>
                 </div>
+                <Modal open={this.state.open} onClose={this.onCloseModal} center>
+                    <h2>{this.state.title}</h2>
+                    <p style={{ 'whiteSpace' : 'pre-line'}}>
+                      {this.state.content}
+                    </p>
+                </Modal>
             </Main>
             </div>
         )}

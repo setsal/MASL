@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import '../../../dist/catagory.css';
 import SinglePost, { About, HotArticle } from './Catagory'
-
+import Modal from "react-responsive-modal";
 
 const Main = styled.main `
     padding: 36px 0 47px;
@@ -19,23 +19,9 @@ const Main = styled.main `
     }
 `;
 
-
-const kinds = [
-    {
-      "kind": "topic0",
-      "articles":
-        [
-            {
-              "title": "topic0-Title0",
-              "content": "topic0-Content0"
-            },
-            {
-                "title": "topic0-Title1",
-                "content": "topic0-Content1"
-            },
-        ]
-    }
-];
+const contentStyle = {
+    whiteSpace: 'pre-line'
+}
 
 
 export default class CatagoryContainer extends Component {
@@ -43,7 +29,12 @@ export default class CatagoryContainer extends Component {
       super(props);
         this.state = {
             topics: [],
+            content: [],
+            title: [],
+            open: false,
         };
+
+        this.onOpenModal = this.onOpenModal.bind(this);
     }
 
     async componentDidMount() {
@@ -65,6 +56,19 @@ export default class CatagoryContainer extends Component {
       }
     }
 
+    onOpenModal(letter, letter2) {
+      this.setState ({
+          open: true,
+          content: letter,
+          title: letter2
+      });
+    }
+
+    onCloseModal = () => {
+      this.setState({ open: false });
+    }
+
+
     render() {
         return (
             <div style={{
@@ -76,7 +80,12 @@ export default class CatagoryContainer extends Component {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-12 col-lg-8">
-                            <SinglePost topics={this.state.topics} />
+                            <SinglePost
+                                topics={this.state.topics}
+                                open={this.state.open}
+                                onOpenModal={this.onOpenModal}
+                                onCloseModal={this.onCloseModal}
+                            />
                         </div>
                         <div className="col-12 col-md-8 col-lg-4">
                             {About}
@@ -84,6 +93,12 @@ export default class CatagoryContainer extends Component {
                         </div>
                     </div>
                 </div>
+                <Modal open={this.state.open} onClose={this.onCloseModal} center>
+                    <h2>{this.state.title}</h2>
+                    <p style={ contentStyle }>
+                      {this.state.content}
+                    </p>
+                </Modal>
             </Main>
             </div>
         )}

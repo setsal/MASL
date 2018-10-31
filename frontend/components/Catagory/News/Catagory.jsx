@@ -1,9 +1,20 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import '../../../dist/catagory.css';
-import bg1 from '../../../dist/img/blog-img/bg1.png';
+import bg1 from '../../../dist/img/blog-img/news_logo.png';
 
-const SinglePost = ({topics}) => {
+const contentStyle = {
+    whiteSpace: 'pre-line'
+}
+
+const SinglePost = ({
+    topics,
+    open,
+    onOpenModal,
+    onCloseModal,
+    getContent
+
+    }) => {
 
     const topicTabs = topics.map((topic, index) => {
         return (<li className="nav-item" key={index}>
@@ -13,19 +24,18 @@ const SinglePost = ({topics}) => {
 
     const articleContents = topics.map((topic, index) => {
         if (index == 0) {
-            return (<div key={index} className="tab-pane fade show active" id={'world-tab-' + index} role="tabpanel" aria-labelledby={'tab' + index}>
+            return (
+
+                <div key={index} className="tab-pane fade show active" id={'world-tab-' + index} role="tabpanel" aria-labelledby={'tab' + index}>
                 {
                     topic.articles.map((d, index_inner) => (<div key={index_inner} className="single-blog-post post-style-4 d-flex align-items-center">
                         <div className="post-thumbnail">
                             <img src={bg1} alt=""/>
                         </div>
-
                         <div className="post-content">
-                            <a href="#" className="headline">
+                            <a className="headline btn" onClick={() => onOpenModal(d.content, d.title)} >
                                 <h5>{d.title}</h5>
                             </a>
-                            <p>{d.content}</p>
-
                             <div className="post-meta">
                                 <p>
                                     <a href="#" className="post-author">{d.company}&nbsp;</a>
@@ -46,11 +56,9 @@ const SinglePost = ({topics}) => {
                         </div>
 
                         <div className="post-content">
-                            <a href="#" className="headline">
+                            <a className="headline btn" onClick={() => onOpenModal(d.content, d.title)} >
                                 <h5>{d.title}</h5>
                             </a>
-                            <p>{d.content}</p>
-
                             <div className="post-meta">
                                 <p>
                                     <a href="#" className="post-author">{d.company}&nbsp;</a>
