@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import '../../dist/catagory.css';
 import SinglePost, { About, HotArticle } from './Catagory'
+import TopicCloud from './TopicCloud'
 import Modal from "react-responsive-modal";
 
 const Main = styled.main `
@@ -33,17 +34,18 @@ export default class CatagoryContainer extends Component {
             topics: [],
             content: [],
             title: [],
+            keywords: [],
             open: false,
         };
 
         this.onOpenModal = this.onOpenModal.bind(this);
+        this.changeKeywords = this.changeKeywords.bind(this);
     }
 
     async componentDidMount() {
       try {
         const res = await fetch('http://localhost:8000/fb_cluster/');
         const topics = await res.json();
-        console.log(topics)
         this.setState({
           topics
         });
@@ -62,6 +64,10 @@ export default class CatagoryContainer extends Component {
 
     onCloseModal = () => {
       this.setState({ open: false });
+    }
+
+    changeKeywords(letter) {
+      this.setState({ keywords: letter });
     }
 
 
@@ -84,11 +90,14 @@ export default class CatagoryContainer extends Component {
                                 open={this.state.open}
                                 onOpenModal={this.onOpenModal}
                                 onCloseModal={this.onCloseModal}
+                                changeKeywords={this.changeKeywords}
                             />
                             </div>
                         </div>
                         <div className="col-12 col-md-8 col-lg-4">
-                            {About}
+                            <TopicCloud
+                                keywords={this.state.keywords}
+                            />
                             {HotArticle}
                         </div>
                     </div>

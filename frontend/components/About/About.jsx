@@ -68,10 +68,10 @@ export default class About extends Component {
         if (this.state.hover) {
             linkStyle = { backgroundColor: 'red', color: inherit }
             console.log("QQ");
-            
-        } 
+
+        }
     }
-    
+
 
     render() {
 
@@ -80,7 +80,7 @@ export default class About extends Component {
             :hover{color: inherit;}
         `;
         */
-        
+
 
         let DOM = this.state.authorlist.map((author) =>
             (<Personal className="col-xxs-12 col-sm-6 col-xxl-3 m-b-xxl" data-toggle="modal" data-target={"#" + author.name + "ModalCenter"}>
@@ -90,7 +90,6 @@ export default class About extends Component {
                 <p className="description mx-auto">
                     {author.descption}
                 </p>
-                <button type="button" className="btn btn-info btn-sm" data-toggle="modal" data-target={"#"+author.name+"ModalCenter"}>點擊查看{author.name}的訊息</button>
 
                 {/* Modal */}
                 <div className="modal fade" id={author.name + "ModalCenter"} tabIndex="-1" role="dialog" aria-labelledby={author.name + "CenterTitle"} aria-hidden="true">
@@ -118,7 +117,7 @@ export default class About extends Component {
 
         return (
             <div style={{
-                'backgroundColor': '#b6c1d9'
+                
             }}>
                 <title>About US</title>
 

@@ -19,13 +19,13 @@ const SinglePost = ({
         open,
         onOpenModal,
         onCloseModal,
-        getContent
+        changeKeywords
     }) => {
 
     const topicTabs = topics.map((topic, index) => {
         return (
             <li className="nav-item" key={index}>
-                <a className="nav-link" id="tab2" data-toggle="tab" href={'#world-tab-' + index} role="tab" aria-controls="world-tab-2" aria-selected="false">{topic.kind}</a>
+                <a className="nav-link" id="tab2" data-toggle="tab" href={'#world-tab-' + index} role="tab" aria-controls="world-tab-2" aria-selected="false" onClick={() => changeKeywords(topics[index]['keyword_of_topic'])}>{topic.kind}</a>
             </li>
         )
     });
@@ -53,13 +53,13 @@ const SinglePost = ({
                             <a href="#" className="headline">
                                 <h5>{d.title}</h5>
                             </a>
-                            <p style={contentStyle}>
+                            <div style={contentStyle}>
                             {
                                 d.content.split("\n").slice(0, 5).map((i, key) => {
                                         return <div key={key}>{i}</div>;
                                 })
                             }
-                            </p>
+                        </div>
                             <a className="btn" onClick={() => onOpenModal(d.content, d.title)}>...read more</a>
                         </div>
                         </div>
@@ -84,13 +84,13 @@ const SinglePost = ({
                                 <a href="#" className="headline">
                                     <h5>{d.title}</h5>
                                 </a>
-                                <p style={contentStyle}>
+                                <div style={contentStyle}>
                                 {
                                     d.content.split("\n").slice(0, 5).map((i, key) => {
                                             return <div key={key}>{i}</div>;
                                     })
                                 }
-                                </p>
+                                </div>
                                 <a className="btn" onClick={() => onOpenModal(d.content, d.title)}>...read more</a>
                             </div>
                             </div>
@@ -108,7 +108,7 @@ const SinglePost = ({
         <div className="post-content-area mb-100">
         <div className="world-catagory-area">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
-                <li className="title">Don't Miss</li>
+                <li className="title">主題文章</li>
                 {topicTabs}
             </ul>
 
@@ -122,12 +122,14 @@ const SinglePost = ({
 
 
 
-export const About = (<div className="sidebar-widget-area">
+export const About = (
+    <div className="sidebar-widget-area">
     <h5 className="title">About MASL</h5>
     <div className="widget-content">
         <p>Cheers OAO/</p>
     </div>
-</div>)
+    </div>
+)
 
 export const HotArticle = (<div className="sidebar-widget-area">
     <h5 className="title">Hot Article</h5>

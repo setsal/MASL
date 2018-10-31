@@ -68,7 +68,7 @@ def getFbCluster():
     # Sort by topic
     topic_list_sort_by_topic = []
     for i in range(num_topic):
-        topic_list_sort_by_topic.append([x for x, y in enumerate(topic_list) if y[0] == i])
+         topic_list_sort_by_topic.append([x for x, y in enumerate(topic_list) if y[0] == i])
 
 
     data = []
@@ -95,12 +95,18 @@ def getFbCluster():
         key_list = lda.show_topic(i, topn=10)
         temp = []
         for tup in key_list:
-            temp.append(tup[0])
+            logging.info( round(tup[1]*100) )
+            temp2 = {
+                'value': tup[0],
+                'count': round(tup[1]*100)*6
+            }
+            temp.append(temp2)
+        logging.info("end")
         keyword_of_topic.append(temp)
 
         topic = {
             'kind': n_topic,
-            'keyword_of_topic': keyword_of_topic,
+            'keyword_of_topic': keyword_of_topic[i],
             'articles': contents
         }
         data.append(topic)
