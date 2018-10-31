@@ -48,18 +48,14 @@ def main():
         corpus = corpora.MmCorpus("output/0814.mm")
         logging.info("Load model success")
     else:
-        logging.info("Please run the train2.py to create dict & data flow")
+        logging.info("Please run the train2.py to create models")
 
-    init_stopword()
-
-    # Create tf-idf model
-    tfidf = models.TfidfModel(corpus)
+    # Load tf-idf model
+    tfidf = models.TfidfModel.load("output/1011.tfidf")
     corpus_tfidf = tfidf[corpus]
 
-    num_topic = 7
-
-    # Transfer to LSI model
-    lda = models.LdaModel(corpus_tfidf, id2word=dictionary, num_topics=num_topic, iterations=100, passes=20)
+    # Load to LDA model
+    lda = models.LdaModel.load("output/1011.lda")
     corpus_lda = lda[corpus_tfidf]
 
     # Get nearest topic for each article
@@ -101,12 +97,11 @@ def main():
         print('\n')
 
     
-    for i in range(0, lda.num_topics-1):
+    for i in range(0, lda.num_topics):
         print(lda.print_topic(i))
 
     # ==============================
     """
-
     
     # ======= topic of articles ========
     # Connect to db and print the article by id
@@ -117,16 +112,26 @@ def main():
 
     # Sort by topic
     topic_list_sort_by_topic = []
-    for i in range(num_topic):
+    for i in range(lda.num_topics):
         topic_list_sort_by_topic.append([x for x, y in enumerate(topic_list_test) if y[0] == i])
     #print(topic_list_sort_by_topic)
     
     
-    for i in range(num_topic):
+    for i in range(lda.num_topics):
         print("*********************************************************************")
         print("Topic" + str(i) + ":")
+        count = 0 
         for id in topic_list_sort_by_topic[i]:
-            print(articles[id][:20])
+            print(articles[id])
+            count += 1
+            if count > 20:
+                break
+        print("\n\n")
+    
+
+    for i in range(lda.num_topics):
+        print(lda.print_topic(i))
+        print("\n")
     
     # =================================
     
