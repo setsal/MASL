@@ -42,7 +42,7 @@ def getFbCluster():
     corpus_tfidf = tfidf[corpus]
 
 
-    num_topic = 7
+    num_topic = 6
 
     # Load to LDA model
     lda = models.LdaModel.load("pybin/train/output/fb.lda")
@@ -112,12 +112,11 @@ def getNewsCluster():
     tfidf = models.TfidfModel.load("pybin/train/output/news.tfidf")
     corpus_tfidf = tfidf[corpus]
 
-
-    num_topic = 5
+    num_topic = 6
 
     # Load to LDA model
     lda = models.LdaModel.load("pybin/train/output/news.lda")
-    corpus_lda = lda[corpus_tfidf]
+    corpus_lda = lda[corpus]
 
     # Get nearest topic for each article
     topic_list = []
@@ -155,7 +154,7 @@ def getNewsCluster():
         contents = []
         idx = 0
         for id in topic_list_sort_by_topic[i]:
-            if idx > 20:
+            if idx > 50:
                 break
             single_post = {
                 'category': categories[id],
