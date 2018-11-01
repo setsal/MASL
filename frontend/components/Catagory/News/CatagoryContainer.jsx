@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import '../../../dist/catagory.css';
 import SinglePost, { About, HotArticle } from './Catagory'
+import TopicCloud from './TopicCloud'
 import Modal from "react-responsive-modal";
 
 const Main = styled.main `
@@ -16,6 +17,10 @@ const Main = styled.main `
     }
     .container {
         margin-top: 80px;
+    }
+    .single_post {
+        text-align: left;
+        white-space: pre-line;
     }
 `;
 
@@ -31,20 +36,15 @@ export default class CatagoryContainer extends Component {
             topics: [],
             content: [],
             title: [],
+            keywords: [],
             open: false,
         };
 
         this.onOpenModal = this.onOpenModal.bind(this);
+        this.changeKeywords = this.changeKeywords.bind(this);
     }
 
     async componentDidMount() {
-      /*
-      axios.get('http://localhost:8000/getCluster/')
-      .then( res => {
-          const articles = res.data;
-          this.setState({ articles });
-      })
-      */
       try {
         const res = await fetch('http://localhost:8000/news_cluster/');
         const topics = await res.json();
@@ -68,6 +68,9 @@ export default class CatagoryContainer extends Component {
       this.setState({ open: false });
     }
 
+    changeKeywords(letter) {
+      this.setState({ keywords: letter });
+    }
 
     render() {
         return (
@@ -85,17 +88,22 @@ export default class CatagoryContainer extends Component {
                                 open={this.state.open}
                                 onOpenModal={this.onOpenModal}
                                 onCloseModal={this.onCloseModal}
+                                changeKeywords={this.changeKeywords}
                             />
                         </div>
                         <div className="col-12 col-md-8 col-lg-4">
-                            {About}
-                            {HotArticle}
+                            <div className="post-sidebar-area">
+                                <TopicCloud
+                                    keywords={this.state.keywords}
+                                />
+                                {HotArticle}
+                            </div>
                         </div>
                     </div>
                 </div>
                 <Modal open={this.state.open} onClose={this.onCloseModal} center>
                     <h2>{this.state.title}</h2>
-                    <p style={ contentStyle }>
+                    <p style={{ 'whiteSpace' : 'pre-line'}}>
                       {this.state.content}
                     </p>
                 </Modal>

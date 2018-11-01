@@ -60,7 +60,7 @@ const SinglePost = ({
                                 })
                             }
                         </div>
-                            <a className="btn" onClick={() => onOpenModal(d.content, d.title)}>...read more</a>
+                            <a className="btn" onClick={() => onOpenModal(d.content, d.title)}>... read more</a>
                         </div>
                         </div>
 

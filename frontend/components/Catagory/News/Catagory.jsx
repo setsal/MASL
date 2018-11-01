@@ -12,14 +12,16 @@ const SinglePost = ({
     open,
     onOpenModal,
     onCloseModal,
-    getContent
+    changeKeywords
 
     }) => {
 
     const topicTabs = topics.map((topic, index) => {
-        return (<li className="nav-item" key={index}>
-            <a className="nav-link" id="tab2" data-toggle="tab" href={'#world-tab-' + index} role="tab" aria-controls="world-tab-2" aria-selected="false">{topic.kind}</a>
-        </li>)
+        return (
+            <li className="nav-item" key={index}>
+                <a className="nav-link" id="tab2" data-toggle="tab" href={'#world-tab-' + index} role="tab" aria-controls="world-tab-2" aria-selected="false" onClick={() => changeKeywords(topics[index]['keyword_of_topic'])}>{topic.kind}</a>
+            </li>
+        )
     });
 
     const articleContents = topics.map((topic, index) => {
@@ -76,7 +78,7 @@ const SinglePost = ({
     return (<div className="post-content-area mb-100">
         <div className="world-catagory-area">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
-                <li className="title">Don't Miss</li>
+                <li className="title">主題文章</li>
                 {topicTabs}
             </ul>
 

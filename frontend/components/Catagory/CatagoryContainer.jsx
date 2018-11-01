@@ -80,7 +80,7 @@ export default class CatagoryContainer extends Component {
             }}>
             <title>Catagory</title>
 
-            <Main>
+            <Main className="rounded-circle">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-12 col-lg-8">

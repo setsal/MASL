@@ -95,13 +95,11 @@ def getFbCluster():
         key_list = lda.show_topic(i, topn=10)
         temp = []
         for tup in key_list:
-            logging.info( round(tup[1]*100) )
             temp2 = {
                 'value': tup[0],
                 'count': round(tup[1]*100)*6
             }
             temp.append(temp2)
-        logging.info("end")
         keyword_of_topic.append(temp)
 
         topic = {
@@ -161,7 +159,7 @@ def getNewsCluster():
 
     data = []
     topic = {}
-
+    keyword_of_topic = []
 
     for i in range(num_topic):
         n_topic = "Topic" + str(i)
@@ -181,8 +179,20 @@ def getNewsCluster():
             contents.append(single_post)
             idx = idx + 1
 
+        key_list = lda.show_topic(i, topn=10)
+        temp = []
+        for tup in key_list:
+            temp2 = {
+                'value': tup[0],
+                'count': round(tup[1]*1000)*3
+            }
+            temp.append(temp2)
+
+        keyword_of_topic.append(temp)
+
         topic = {
             'kind': n_topic,
+            'keyword_of_topic': keyword_of_topic[i],
             'articles': contents
         }
         data.append(topic)
