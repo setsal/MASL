@@ -89,45 +89,11 @@ const SinglePost = ({
     </div>)
 }
 
-
-
-export const About = (<div className="sidebar-widget-area">
-    <h5 className="title">About MASL</h5>
-    <div className="widget-content">
-        <p>Cheers OAO/</p>
-    </div>
-</div>)
-
 export const HotArticle = (<div className="sidebar-widget-area">
     <h5 className="title">Hot Article</h5>
     <div className="widget-content">
-
-        <div className="single-blog-post post-style-2 d-flex align-items-center widget-post">
-
-            <div className="post-thumbnail">
-                <img src={bg1} alt=""/>
-            </div>
-
-            <div className="post-content">
-                <a href="#" className="headline">
-                    <h5 className="mb-0">To be continue..</h5>
-                </a>
-            </div>
-        </div>
-
-        <div className="single-blog-post post-style-2 d-flex align-items-center widget-post">
-
-            <div className="post-thumbnail">
-                <img src={bg1} alt=""/>
-            </div>
-
-            <div className="post-content">
-                <a href="#" className="headline">
-                    <h5 className="mb-0">To be continue..</h5>
-                </a>
-            </div>
-        </div>
-
+        <p>目前新聞來源: 4 間</p>
+        <p>文章總數: 1517 篇</p>
     </div>
 </div>)
 

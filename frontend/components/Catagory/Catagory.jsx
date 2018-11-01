@@ -41,11 +41,10 @@ const SinglePost = ({
 
                         <div key={index_inner} className="single-blog-post post-style-4 d-flex align-items-center">
                         <div className="post-thumbnail">
-                            <img src={bg1} alt=""/>
                             {
-                                /*
-                                <img src={imagePath('./'+ d.clubs_id + '.png')} alt=""/>
-                                */
+
+                                <img src={imagePath('./'+ d.clubs_id + '.jpg')} alt=""/>
+
                             }
                         </div>
 
@@ -77,7 +76,7 @@ const SinglePost = ({
                         return (
                             <div key={index_inner} className="single-blog-post post-style-4 d-flex align-items-center">
                             <div className="post-thumbnail">
-                                <img src={bg1} alt=""/>
+                                <img src={imagePath('./'+ d.clubs_id + '.jpg')} alt=""/>
                             </div>
 
                             <div className="post-content">
@@ -120,47 +119,11 @@ const SinglePost = ({
     )
 }
 
-
-
-export const About = (
-    <div className="sidebar-widget-area">
-    <h5 className="title">About MASL</h5>
-    <div className="widget-content">
-        <p>Cheers OAO/</p>
-    </div>
-    </div>
-)
-
 export const HotArticle = (<div className="sidebar-widget-area">
-    <h5 className="title">Hot Article</h5>
+    <h5 className="title">數據資料</h5>
     <div className="widget-content">
-
-        <div className="single-blog-post post-style-2 d-flex align-items-center widget-post">
-
-            <div className="post-thumbnail">
-                <img src={bg1} alt=""/>
-            </div>
-
-            <div className="post-content">
-                <a href="#" className="headline">
-                    <h5 className="mb-0">To be continue..</h5>
-                </a>
-            </div>
-        </div>
-
-        <div className="single-blog-post post-style-2 d-flex align-items-center widget-post">
-
-            <div className="post-thumbnail">
-                <img src={bg1} alt=""/>
-            </div>
-
-            <div className="post-content">
-                <a href="#" className="headline">
-                    <h5 className="mb-0">To be continue..</h5>
-                </a>
-            </div>
-        </div>
-
+        <p>目前社團總數: 279 個</p>
+        <p>文章總數: 3943 篇</p>
     </div>
 </div>)
 
