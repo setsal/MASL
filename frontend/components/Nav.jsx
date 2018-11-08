@@ -22,14 +22,14 @@ export default class Nav extends React.Component {
                                 <div className="collapse navbar-collapse" id="worldNav">
                                     <ul className="navbar-nav ml-auto">
                                         <li className="nav-item active">
-                                            <a className="nav-link" href="/">Home
+                                            <a className="nav-link" href="/search">Search
                                                 <span className="sr-only">(current)</span>
                                             </a>
                                         </li>
                                         <li className="nav-item dropdown">
                                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
                                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a className="dropdown-item" href="/">Home</a>
+                                                <a className="dropdown-item" href="/customize">Customize</a>
                                                 <a className="dropdown-item" href="/catagory">Catagory</a>
                                                 <a className="dropdown-item" href="/newscatagory">NewsCatagory</a>
                                             </div>

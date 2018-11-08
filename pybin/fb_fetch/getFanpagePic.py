@@ -32,8 +32,6 @@ def main():
     cursor = conn.execute('select * from fb_fetch_club;')
 
     for row in cursor:
-        if( row[0] < 224 ):
-            continue;
         url = set_parameter(row[1])
         logging.info("Try to fetch id:%d fanpage pic url" % row[0])
         r = requests.get( set_parameter(row[1]) )

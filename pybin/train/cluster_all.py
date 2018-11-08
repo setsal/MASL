@@ -200,7 +200,88 @@ def getNewsCluster():
     return(data)
 
 
+def getFbCustomizeCluster(n_article):
 
+    logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
+    if ( os.path.exists("pybin/train/output/fb.dict") ):
+        dictionary = corpora.Dictionary.load("pybin/train/output/fb.dict")
+        corpus = corpora.MmCorpus("pybin/train/output/fb.mm")
+        logging.info("Load model success")
+    else:
+        logging.info("Please run the train2.py to create models")
+
+    # Load tf-idf model
+    tfidf = models.TfidfModel.load("pybin/train/output/fb.tfidf")
+    corpus_tfidf = tfidf[corpus]
+
+
+    num_topic = 6
+
+    # Load to LDA model
+    lda = models.LdaModel.load("pybin/train/output/fb.lda")
+    corpus_lda = lda[corpus_tfidf]
+
+    # Get nearest topic for each article
+    topic_list = []
+    index = 0
+    for doc in corpus_lda:
+        topic_list.append(my_absmax(doc))
+
+    # Connect to db and print the article by id
+    conn = sqlite3.connect('db.sqlite3')
+    articles = []
+    titles = []
+    clubs_id = []
+    for row in conn.execute('SELECT fb_fetch_article.id, fb_fetch_article.content, fb_fetch_club.name, fb_fetch_club.id FROM fb_fetch_article INNER JOIN fb_fetch_club ON fb_fetch_club.cid = fb_fetch_article.cid'):
+        articles.append(row[1])
+        titles.append(row[2])
+        clubs_id.append(row[3])
+
+    # Sort by topic
+    topic_list_sort_by_topic = []
+    for i in range(num_topic):
+         topic_list_sort_by_topic.append([x for x, y in enumerate(topic_list) if y[0] == i])
+
+
+    data = []
+    topic = {}
+    keyword_of_topic = []
+
+    for i in range(num_topic):
+        n_topic = "Topic" + str(i)
+
+        contents = []
+        idx = 0
+        for id in topic_list_sort_by_topic[i]:
+            if idx > n_article:
+                break
+            single_post = {
+                'title': titles[id],
+                'content': articles[id],
+                'clubs_id': clubs_id[id]
+            }
+            contents.append(single_post)
+            idx = idx + 1
+
+
+        key_list = lda.show_topic(i, topn=10)
+        temp = []
+        for tup in key_list:
+            temp2 = {
+                'value': tup[0],
+                'count': round(tup[1]*100)*6
+            }
+            temp.append(temp2)
+        keyword_of_topic.append(temp)
+
+        topic = {
+            'kind': n_topic,
+            'keyword_of_topic': keyword_of_topic[i],
+            'articles': contents
+        }
+        data.append(topic)
+
+    return(data)
 
 #if __name__ == "__main__":
     #cluster = getCluster()

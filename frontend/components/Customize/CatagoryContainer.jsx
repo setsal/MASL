@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import '../../dist/catagory.css';
-import SinglePost, { About, HotArticle } from './Catagory'
-import TopicCloud from './TopicCloud'
+import SinglePost, { About, HotArticle } from '../Catagory/Catagory'
+import TopicCloud from '../Catagory/TopicCloud'
 import Modal from "react-responsive-modal";
+
 
 const Main = styled.main `
     padding: 36px 0 47px;
@@ -46,15 +47,13 @@ export default class CatagoryContainer extends Component {
     }
 
     async componentDidMount() {
-      try {
-        const res = await fetch('http://localhost:8000/fb_cluster/');
-        const topics = await res.json();
+
+        const topics = this.props.location.state
+        console.log(topics)
         this.setState({
-          topics
+           topics
         });
-      } catch (e) {
-        console.log(e);
-      }
+
     }
 
     onOpenModal(letter, letter2) {

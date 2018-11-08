@@ -122,8 +122,8 @@ const SinglePost = ({
 export const HotArticle = (<div className="sidebar-widget-area">
     <h5 className="title">數據資料</h5>
     <div className="widget-content">
-        <p>目前社團總數: 279 個</p>
-        <p>文章總數: 3943 篇</p>
+        <p>目前社團總數: 273 個</p>
+        <p>文章總數: 3857 篇</p>
     </div>
 </div>)
 
