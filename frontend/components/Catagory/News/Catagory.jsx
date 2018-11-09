@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import '../../../dist/catagory.css';
-import bg1 from '../../../dist/img/blog-img/news_logo.png';
+const images = require.context('../../../dist/img/media-img', true)
+const imagePath = (name) => images(name, true)
 
 const contentStyle = {
     whiteSpace: 'pre-line'
@@ -32,7 +33,11 @@ const SinglePost = ({
                 {
                     topic.articles.map((d, index_inner) => (<div key={index_inner} className="single-blog-post post-style-4 d-flex align-items-center">
                         <div className="post-thumbnail">
-                            <img src={bg1} alt=""/>
+                            {
+
+                                <img src={imagePath('./'+ d.company_id + '.png')} alt=""/>
+
+                            }
                         </div>
                         <div className="post-content">
                             <a className="headline btn" onClick={() => onOpenModal(d.content, d.title)} >
@@ -54,7 +59,11 @@ const SinglePost = ({
                 {
                     topic.articles.map((d, index_inner) => (<div key={index_inner} className="single-blog-post post-style-4 d-flex align-items-center">
                         <div className="post-thumbnail">
-                            <img src={bg1} alt=""/>
+                            {
+
+                                <img src={imagePath('./'+ d.company_id + '.png')} alt=""/>
+
+                            }
                         </div>
 
                         <div className="post-content">

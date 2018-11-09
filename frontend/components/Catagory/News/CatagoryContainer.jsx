@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import '../../../dist/catagory.css';
 import SinglePost, { About, HotArticle } from './Catagory'
-import TopicCloud from './TopicCloud'
+import TopicCloud from '../TopicCloud'
 import Modal from "react-responsive-modal";
 
 const Main = styled.main `
@@ -21,6 +21,9 @@ const Main = styled.main `
     .single_post {
         text-align: left;
         white-space: pre-line;
+    }
+    .widget-content {
+        line-height: 1.5;
     }
 `;
 

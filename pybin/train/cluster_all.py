@@ -144,12 +144,14 @@ def getNewsCluster():
     articles = []
     titles = []
     companys = []
+    companys_id = []
     categories = []
-    for row in conn.execute('SELECT media_fetch_news.id, media_fetch_news.category, media_fetch_news.title, media_fetch_news.content, media_fetch_company.name FROM media_fetch_news INNER JOIN media_fetch_company ON media_fetch_news.mid_id = media_fetch_company.id;'):
+    for row in conn.execute('SELECT media_fetch_news.id, media_fetch_news.category, media_fetch_news.title, media_fetch_news.content, media_fetch_news.mid_id, media_fetch_company.name FROM media_fetch_news INNER JOIN media_fetch_company ON media_fetch_news.mid_id = media_fetch_company.id;'):
         categories.append(row[1])
         titles.append(row[2])
         articles.append(row[3])
-        companys.append(row[4])
+        companys_id.append(row[4])
+        companys.append(row[5])
 
     # Sort by topic
     topic_list_sort_by_topic = []
@@ -174,6 +176,7 @@ def getNewsCluster():
                 'category': categories[id],
                 'title': titles[id],
                 'content': articles[id],
+                'company_id': companys_id[id],
                 'company': companys[id]
             }
             contents.append(single_post)

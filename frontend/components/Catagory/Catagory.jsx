@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import '../../dist/catagory.css';
 import bg1 from '../../dist/img/blog-img/bg1.png';
-import Modal from "react-responsive-modal";
 
 const images = require.context('../../dist/img/fb-club-img', true)
 const imagePath = (name) => images(name, true)

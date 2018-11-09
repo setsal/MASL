@@ -30,8 +30,8 @@ def insert_company( name ):
 
 
 # insert news to sql
-def insert_news( category, title, content, url, mid  ):
-    conn.execute("insert into media_fetch_news ( category, title, content, url, mid_id, created_at ) values( ?, ?, ?, ?, ?, ? )", ( category, title, content, url, mid, datetime.datetime.now()) )
+def insert_news( category, title, content, url, datetime, mid  ):
+    conn.execute("insert into media_fetch_news ( category, title, content, url, mid_id, created_at ) values( ?, ?, ?, ?, ?, ? )", ( category, title, content, url, mid, datetime ) )
     conn.commit()
 
 
@@ -42,16 +42,18 @@ def readfile(filename):
 
     mid = insert_company(data[1]['website'])
 
-    for i in range( len(data) ):
+    for i in range( 1 ):
         category = data[i]['category'].strip()
         title = data[i]['title'].strip()
         content = data[i]['content'].strip()
         url = data[i]['url'].strip()
+        datetime = data[i]['date'].strip()
+
 
         if not title or not content or len(content)<20:
             continue
         logging.info("Try to add %d mid company %d news", mid, i )
-        insert_news( category, title, content, url, mid )
+        insert_news( category, title, content, url, datetime, mid )
 
 
 
