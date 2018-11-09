@@ -15,3 +15,4 @@ webpack-stats-local.json
 package-lock.json
 .env
 pybin/media/db_modify/json/
+frontend/dist/img/fb-club-img/*

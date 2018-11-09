@@ -78,12 +78,12 @@ def main():
     corpora.MmCorpus.serialize("output/fb.mm", corpus)
     logging.info("Create data flow success.")
     
-    """
+    
     tfidf = models.TfidfModel(corpus)
     tfidf.save("output/fb.tfidf")
     corpus_tfidf = tfidf[corpus]
     logging.info("Create TF-IDF model success.")
-    """
+    
     
     num_topic = 9
 

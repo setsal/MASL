@@ -22,6 +22,9 @@ const Main = styled.main `
         text-align: left;
         white-space: pre-line;
     }
+    .widget-content {
+        line-height: 1.5;
+    }
 
 `;
 

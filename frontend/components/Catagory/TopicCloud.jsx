@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import '../../dist/catagory.css';
 import { TagCloud } from "react-tagcloud";
-
 const options = {
   luminosity: 'light',
   hue: 'blue'

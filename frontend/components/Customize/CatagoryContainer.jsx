@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import '../../../dist/catagory.css';
-import SinglePost, { About, HotArticle } from './Catagory'
-import TopicCloud from '../TopicCloud'
+import '../../dist/catagory.css';
+import SinglePost, { About, HotArticle } from '../Catagory/Catagory'
+import TopicCloud from '../Catagory/TopicCloud'
 import Modal from "react-responsive-modal";
+
 
 const Main = styled.main `
     padding: 36px 0 47px;
@@ -25,16 +26,14 @@ const Main = styled.main `
     .widget-content {
         line-height: 1.5;
     }
-`;
 
-const contentStyle = {
-    whiteSpace: 'pre-line'
-}
+`;
 
 
 export default class CatagoryContainer extends Component {
     constructor(props) {
       super(props);
+
         this.state = {
             topics: [],
             content: [],
@@ -48,15 +47,13 @@ export default class CatagoryContainer extends Component {
     }
 
     async componentDidMount() {
-      try {
-        const res = await fetch('http://localhost:8000/news_cluster/');
-        const topics = await res.json();
+
+        const topics = this.props.location.state
+        console.log(topics)
         this.setState({
-          topics
+           topics
         });
-      } catch (e) {
-        console.log(e);
-      }
+
     }
 
     onOpenModal(letter, letter2) {
@@ -75,17 +72,21 @@ export default class CatagoryContainer extends Component {
       this.setState({ keywords: letter });
     }
 
+
     render() {
+        const { open } = this.state;
+
         return (
             <div style={{
                 'backgroundColor' : '#fff'
             }}>
             <title>Catagory</title>
 
-            <Main>
+            <Main className="rounded-circle">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-12 col-lg-8">
+                            <div className="single_post">
                             <SinglePost
                                 topics={this.state.topics}
                                 open={this.state.open}
@@ -93,14 +94,13 @@ export default class CatagoryContainer extends Component {
                                 onCloseModal={this.onCloseModal}
                                 changeKeywords={this.changeKeywords}
                             />
+                            </div>
                         </div>
                         <div className="col-12 col-md-8 col-lg-4">
-                            <div className="post-sidebar-area">
-                                <TopicCloud
-                                    keywords={this.state.keywords}
-                                />
-                                {HotArticle}
-                            </div>
+                            <TopicCloud
+                                keywords={this.state.keywords}
+                            />
+                            {HotArticle}
                         </div>
                     </div>
                 </div>

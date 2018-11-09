@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import '../../../dist/catagory.css';
-import bg1 from '../../../dist/img/blog-img/news_logo.png';
+const images = require.context('../../../dist/img/media-img', true)
+const imagePath = (name) => images(name, true)
 
 const contentStyle = {
     whiteSpace: 'pre-line'
@@ -32,7 +33,11 @@ const SinglePost = ({
                 {
                     topic.articles.map((d, index_inner) => (<div key={index_inner} className="single-blog-post post-style-4 d-flex align-items-center">
                         <div className="post-thumbnail">
-                            <img src={bg1} alt=""/>
+                            {
+
+                                <img src={imagePath('./'+ d.company_id + '.png')} alt=""/>
+
+                            }
                         </div>
                         <div className="post-content">
                             <a className="headline btn" onClick={() => onOpenModal(d.content, d.title)} >
@@ -54,7 +59,11 @@ const SinglePost = ({
                 {
                     topic.articles.map((d, index_inner) => (<div key={index_inner} className="single-blog-post post-style-4 d-flex align-items-center">
                         <div className="post-thumbnail">
-                            <img src={bg1} alt=""/>
+                            {
+
+                                <img src={imagePath('./'+ d.company_id + '.png')} alt=""/>
+
+                            }
                         </div>
 
                         <div className="post-content">
@@ -89,45 +98,11 @@ const SinglePost = ({
     </div>)
 }
 
-
-
-export const About = (<div className="sidebar-widget-area">
-    <h5 className="title">About MASL</h5>
-    <div className="widget-content">
-        <p>Cheers OAO/</p>
-    </div>
-</div>)
-
 export const HotArticle = (<div className="sidebar-widget-area">
     <h5 className="title">Hot Article</h5>
     <div className="widget-content">
-
-        <div className="single-blog-post post-style-2 d-flex align-items-center widget-post">
-
-            <div className="post-thumbnail">
-                <img src={bg1} alt=""/>
-            </div>
-
-            <div className="post-content">
-                <a href="#" className="headline">
-                    <h5 className="mb-0">To be continue..</h5>
-                </a>
-            </div>
-        </div>
-
-        <div className="single-blog-post post-style-2 d-flex align-items-center widget-post">
-
-            <div className="post-thumbnail">
-                <img src={bg1} alt=""/>
-            </div>
-
-            <div className="post-content">
-                <a href="#" className="headline">
-                    <h5 className="mb-0">To be continue..</h5>
-                </a>
-            </div>
-        </div>
-
+        <p>目前新聞來源: 4 間</p>
+        <p>文章總數: 1517 篇</p>
     </div>
 </div>)
 

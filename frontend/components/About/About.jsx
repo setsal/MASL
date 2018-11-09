@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Container, Divider, Grid, Header, Segment, Icon } from 'semantic-ui-react'
+
 
 const Main = styled.main`
     padding: 36px 0 47px;
+    text-align: center;
     h2 {
         font-weight: 300;
         font-size: 32px;
@@ -83,7 +86,9 @@ export default class About extends Component {
 
 
         let DOM = this.state.authorlist.map((author) =>
-            (<Personal className="col-xxs-12 col-sm-6 col-xxl-3 m-b-xxl" data-toggle="modal" data-target={"#" + author.name + "ModalCenter"}>
+            (
+
+                <Personal className="col-xxs-12 col-sm-6 col-xxl-3 m-b-xxl" data-toggle="modal" data-target={"#" + author.name + "ModalCenter"}>
                 <PersonalIMG className="img-circle img-fluid mx-auto m-b" src={author.pic} />
                 <h3 className="text-md text-bold">{author.name}</h3>
                 <p className="text-xxs mb-2 text-uppercase">Programer</p>
@@ -112,35 +117,38 @@ export default class About extends Component {
                     </div>
                 </div>
 
-            </Personal>)
+            </Personal>
+            )
         )
 
         return (
             <div style={{
-                
+
             }}>
                 <title>About US</title>
 
                 <Main>
-                    <div className="container">
-                        <div className="row">
+                    <Container>
+                        <style>{`
+                          p > span {
+                            opacity: 0.4;
+                            text-align: center;
+                          }
+                        }
+                        `}</style>
+                        <Grid.Row>
                             <div className="col-xxs-12 col-lg-10 mx-auto">
-                                <div className="row">
-                                    {/* <a href="" className="custom-card" onMouseEnter={this.toggleHover}> */}
-                                    <section className="card card-lg p-b-0 text-xxs-center" id="about-leadership">
-                                        <h2>Leadership</h2>
-
-                                        <div className="row">
+                                    <Segment>
+                                        <Header as='h2' textAlign='center' style={{ marginTop: '1.2rem'}}>
+                                          Leadership
+                                        </Header>
+                                        <Grid.Row>
                                             {DOM}
-                                        </div>
-
-                                    </section>
-                                    {/* </a> */}
-
-                                </div>
+                                        </Grid.Row>
+                                    </Segment>
                             </div>
-                        </div>
-                    </div>
+                        </Grid.Row>
+                    </Container>
                 </Main>
             </div>
         )
