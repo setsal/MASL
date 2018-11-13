@@ -29,6 +29,17 @@ def getArticle(table_name):
         data.append(temp)
     return data
 
+# Get sql data by time stamp
+def getArticleByTime(table_name, datefrom, dateto):
+    data = []
+    conn = sqlite3.connect('../../db.sqlite3')
+    r = u'[0-9０-２ぁ-ゟ゠-ヿ’!＆"#$￥%％&\'()ᵕ⁎❷❶⛩║⸝*+,-.・▪．･▫☪✿◕ᴗㅿ▸˙｀❘／/:：˘´;°ƪʃ❁<=＝>≧≦＞?↓➡–➡️@⚠🙏😂❤♥♡💕❤️💘🎡💋💎🌸▲😭※＊◎🔸🐢🦔🎉✨📢💦🎀🎊🤣😊∀▽⭐🌟☆✮▶■—－─→～＿●•ωД๑，。ﾟ｡?★、…【】《》〔〕？“”‘’！[\\]^_`{|}~]+'
+    for row in conn.execute('SELECT id, content FROM {} WHERE created_at >= {} and created_at <= {}'.format(table_name, datefrom, dateto)):
+        temp = ''.join(row[1].strip('\n').split())
+        temp = re.sub(r, '', temp)
+        data.append(temp)
+    return data
+
 # Get sql data by cid
 def getArticleByCid(cid):
     data = []

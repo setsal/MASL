@@ -120,21 +120,21 @@ def getFbCluster():
 def getNewsCluster():
     logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
 
-    if ( os.path.exists("pybin/train/output/news.dict") ):
-        dictionary = corpora.Dictionary.load("pybin/train/output/news.dict")
-        corpus = corpora.MmCorpus("pybin/train/output/news.mm")
+    if ( os.path.exists("pybin/train/output/news_sep.dict") ):
+        dictionary = corpora.Dictionary.load("pybin/train/output/news_sep.dict")
+        corpus = corpora.MmCorpus("pybin/train/output/news_sep.mm")
         logging.info("Load model success")
     else:
         logging.info("Please run the train2.py to create models")
 
     # Load tf-idf model
-    tfidf = models.TfidfModel.load("pybin/train/output/news.tfidf")
+    tfidf = models.TfidfModel.load("pybin/train/output/news_sep.tfidf")
     corpus_tfidf = tfidf[corpus]
 
     num_topic = 6
 
     # Load to LDA model
-    lda = models.LdaModel.load("pybin/train/output/news.lda")
+    lda = models.LdaModel.load("pybin/train/output/news_sep.lda")
     corpus_lda = lda[corpus]
 
     # Get nearest topic for each article
@@ -151,7 +151,7 @@ def getNewsCluster():
     companys = []
     companys_id = []
     categories = []
-    for row in conn.execute('SELECT media_fetch_news.id, media_fetch_news.category, media_fetch_news.title, media_fetch_news.content, media_fetch_news.mid_id, media_fetch_company.name FROM media_fetch_news INNER JOIN media_fetch_company ON media_fetch_news.mid_id = media_fetch_company.id;'):
+    for row in conn.execute('SELECT media_fetch_news.id, media_fetch_news.category, media_fetch_news.title, media_fetch_news.content, media_fetch_news.mid_id, media_fetch_company.name FROM media_fetch_news INNER JOIN media_fetch_company ON media_fetch_news.mid_id = media_fetch_company.id WHERE media_fetch_news.created_at >= "2018-09-01" and media_fetch_news.created_at <= "2018-09-30";'):
         categories.append(row[1])
         titles.append(row[2])
         articles.append(row[3])

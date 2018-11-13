@@ -42,7 +42,7 @@ def readfile(filename):
 
     mid = insert_company(data[1]['website'])
 
-    for i in range( 1 ):
+    for i in range(len(data)):
         category = data[i]['category'].strip()
         title = data[i]['title'].strip()
         content = data[i]['content'].strip()
