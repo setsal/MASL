@@ -21,27 +21,22 @@ export default class Nav extends React.Component {
 
                                 <div className="collapse navbar-collapse" id="worldNav">
                                     <ul className="navbar-nav ml-auto">
-                                        <li className="nav-item active">
-                                            <a className="nav-link" href="/search">Search
-                                                <span className="sr-only">(current)</span>
-                                            </a>
+                                        <li className="nav-item dropdown">
+                                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">臉書</a>
+                                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">                                                                                    
+                                                <a className="dropdown-item" href="/catagory">類別</a>
+                                                <a className="dropdown-item" href="/fb_customize">自定義</a>
+                                            </div>
                                         </li>
                                         <li className="nav-item dropdown">
-                                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">新聞</a>
                                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a className="dropdown-item" href="/customize">Customize</a>
-                                                <a className="dropdown-item" href="/catagory">Catagory</a>
-                                                <a className="dropdown-item" href="/newscatagory">NewsCatagory</a>
+                                                <a className="dropdown-item" href="/newscatagory">類別</a>
+                                                <a className="dropdown-item" href="/news_customize">自定義</a>
                                             </div>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="/about/">About Us</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="#">Sign In</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="#">Sign Up</a>
+                                            <a className="nav-link" href="/about/">關於我們</a>
                                         </li>
                                     </ul>
 

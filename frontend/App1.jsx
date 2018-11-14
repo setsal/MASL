@@ -10,8 +10,10 @@ import Footer from "./components/Footer"
 import Catagory from "./components/Catagory/CatagoryContainer"
 import NewsCatagory from "./components/Catagory/News/CatagoryContainer"
 import Nav from "./components/Nav"
-import Customize from './components/Customize'
-import FBCustomize from './components/Customize/CatagoryContainer'
+import FBCustomize from './components/Customize'
+import FBResult from './components/Customize/CatagoryContainer'
+import NewsCustomize from './components/Customize/News'
+import NewsResult from './components/Customize/News/CatagoryContainer'
 import 'semantic-ui-css/semantic.min.css'
 import './dist/style.css'
 
@@ -30,8 +32,12 @@ class App1 extends React.Component {
                 <Route path="/about" component={About} />
                 <Route path="/catagory" component={Catagory} />
                 <Route path="/newscatagory" component={NewsCatagory} />
-                <Route path="/customize" component={Customize} />
-                <Route path="/fbcustomize" component={FBCustomize} />
+
+                <Route path="/fb_customize" component={FBCustomize} />
+                <Route path="/fb_result" component={FBResult} />
+
+                <Route path="/news_customize" component={NewsCustomize} />
+                <Route path="/news_result" component={NewsResult} />
             <Footer />
         </Global>
         </BrowserRouter>
