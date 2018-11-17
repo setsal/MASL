@@ -13,6 +13,29 @@ import pickle
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
 
+def Month2Datetime(month):
+    datefrom = ""
+    dateto = ""
+
+    if month == "Sep":
+        datefrom = "\"2018-01-01\""
+        dateto = "\"2018-01-31\""
+    elif month == "Sep_e":
+        datefrom = "\"2018-09-01\""
+        dateto = "\"2018-09-31\""
+    elif month == "Oct":
+        datefrom = "\"2018-10-01\""
+        dateto = "\"2018-10-31\""
+    elif month == "Nov":
+        datefrom = "\"2018-11-01\""
+        dateto = "\"2018-11-31\""
+    elif month == "Nov_e":
+        datefrom = "\"2018-11-01\""
+        dateto = "\"2018-11-15\""
+
+    return datefrom, dateto
+
+
 def my_absmax(sequence):
     if not sequence:
         raise ValueError('empty sequence')
@@ -48,6 +71,8 @@ def getFbCluster():
     # Load to LDA model
     lda = models.LdaModel.load("pybin/train/output/fb.lda")
     corpus_lda = lda[corpus]
+
+    num_topic = lda.num_topics
 
     # Load id list after filter
     with open("pybin/train/output/train_id", "rb") as fp:
@@ -293,26 +318,23 @@ def getFbCustomizeCluster(n_article):
 
 
 def getNewsCustomizeCluster(n_article, month):
-
-    return month;
+    datefrom, dateto = Month2Datetime(month)
+    # return month, datetime, dateto
     logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
-    if ( os.path.exists("pybin/train/output/fb.dict") ):
-        dictionary = corpora.Dictionary.load("pybin/train/output/fb.dict")
-        corpus = corpora.MmCorpus("pybin/train/output/fb.mm")
-        logging.info("Load model success")
-    else:
-        logging.info("Please run the train2.py to create models")
+
+    dictionary = corpora.Dictionary.load("pybin/train/output/news_" + month+ ".dict")
+    corpus = corpora.MmCorpus("pybin/train/output/news_" + month+ ".mm")
 
     # Load tf-idf model
-    tfidf = models.TfidfModel.load("pybin/train/output/fb.tfidf")
+    tfidf = models.TfidfModel.load("pybin/train/output/news_" + month+ ".tfidf")
     corpus_tfidf = tfidf[corpus]
 
 
-    num_topic = 6
-
     # Load to LDA model
-    lda = models.LdaModel.load("pybin/train/output/fb.lda")
+    lda = models.LdaModel.load("pybin/train/output/news_" + month+ ".lda")
     corpus_lda = lda[corpus_tfidf]
+
+    num_topic = lda.num_topics
 
     # Get nearest topic for each article
     topic_list = []
@@ -324,11 +346,22 @@ def getNewsCustomizeCluster(n_article, month):
     conn = sqlite3.connect('db.sqlite3')
     articles = []
     titles = []
-    clubs_id = []
-    for row in conn.execute('SELECT fb_fetch_article.id, fb_fetch_article.content, fb_fetch_club.name, fb_fetch_club.id FROM fb_fetch_article INNER JOIN fb_fetch_club ON fb_fetch_club.cid = fb_fetch_article.cid'):
-        articles.append(row[1])
+    companys = []
+    companys_id = []
+    categories = []
+    createtime = []
+    logging.info('% % ', datefrom, dateto)
+    for row in conn.execute('SELECT media_fetch_news.id, media_fetch_news.category, media_fetch_news.title, media_fetch_news.content, media_fetch_news.mid_id, media_fetch_company.name, media_fetch_news.created_at  \
+                             FROM media_fetch_news \
+                             INNER JOIN media_fetch_company ON media_fetch_news.mid_id = media_fetch_company.id \
+                             WHERE media_fetch_news.created_at >= {} and media_fetch_news.created_at <= {}'.format(datefrom, dateto)):
+
+        categories.append(row[1])
         titles.append(row[2])
-        clubs_id.append(row[3])
+        articles.append(row[3])
+        companys_id.append(row[4])
+        companys.append(row[5])
+        createtime.append(row[6])
 
     # Sort by topic
     topic_list_sort_by_topic = []
@@ -340,31 +373,39 @@ def getNewsCustomizeCluster(n_article, month):
     topic = {}
     keyword_of_topic = []
 
+
     for i in range(num_topic):
         n_topic = "Topic" + str(i)
+
 
         contents = []
         idx = 0
         for id in topic_list_sort_by_topic[i]:
+            # if topic_list[id][1] < 0.85:
+            #     idx = idx + 1
+            #     continue
             if idx > n_article:
                 break
             single_post = {
+                'category': categories[id],
                 'title': titles[id],
                 'content': articles[id],
-                'clubs_id': clubs_id[id]
+                'company_id': companys_id[id],
+                'company': companys[id],
+                'timestamp': createtime[id]
             }
             contents.append(single_post)
             idx = idx + 1
-
 
         key_list = lda.show_topic(i, topn=10)
         temp = []
         for tup in key_list:
             temp2 = {
                 'value': tup[0],
-                'count': round(tup[1]*100)*6
+                'count': round(tup[1]*1000)*3
             }
             temp.append(temp2)
+
         keyword_of_topic.append(temp)
 
         topic = {
@@ -375,7 +416,6 @@ def getNewsCustomizeCluster(n_article, month):
         data.append(topic)
 
     return(data)
-
 
 
 #if __name__ == "__main__":

@@ -26,7 +26,7 @@ def main():
 
     datefrom = ""
     dateto = ""
-    
+
     if sys.argv[1] == "Jan":
         datefrom = "\"2018-01-01\""
         dateto = "\"2018-01-31\""
@@ -60,6 +60,9 @@ def main():
     elif sys.argv[1] == "Nov":
         datefrom = "\"2018-11-01\""
         dateto = "\"2018-11-31\""
+    elif sys.argv[1] == "Nov_e":
+        datefrom = "\"2018-11-01\""
+        dateto = "\"2018-11-15\""
     elif sys.argv[1] == "Dec":
         datefrom = "\"2018-12-01\""
         dateto = "\"2018-12-31\""
@@ -70,7 +73,7 @@ def main():
     if not article_lists:
         logging.error("No news data in the month, please choose another")
         sys.exit()
-    
+
     seg_list = getSegment(article_lists)
 
     minn = 30
@@ -97,7 +100,7 @@ def main():
     dictname = "news_" + sys.argv[1] + ".dict"
     mmname = "news_" + sys.argv[1] + ".mm"
     tfidfname = "news_" + sys.argv[1] + ".tfidf"
-    ldaname = "news_" + sys.argv[1] + ".lda" 
+    ldaname = "news_" + sys.argv[1] + ".lda"
 
     # Create dictionary
     dictionary = corpora.Dictionary(texts)
@@ -111,13 +114,13 @@ def main():
     corpora.MmCorpus.serialize("output/" + mmname, corpus)
     logging.info("Create data flow success.")
 
-    
+
     tfidf = models.TfidfModel(corpus)
     tfidf.save("output/" + tfidfname)
     corpus_tfidf = tfidf[corpus]
     logging.info("Create TF-IDF model success.")
 
-    num_topic = 6
+    num_topic = 1
 
     # Transfer to LSI model
     lda = models.LdaModel(corpus, id2word=dictionary, num_topics=num_topic, iterations=100, passes=20)
@@ -127,7 +130,7 @@ def main():
     for i in range(lda.num_topics):
         print(lda.print_topic(i))
         print('\n')
-    
+
 
 if __name__ == "__main__":
 	main()

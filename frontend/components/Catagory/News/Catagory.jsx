@@ -45,9 +45,7 @@ const SinglePost = ({
                             </a>
                             <div className="post-meta">
                                 <p>
-                                    <a href="#" className="post-author">{d.company}&nbsp;</a>
-                                    -
-                                    <a href="#" className="post-date">&nbsp;{d.category}</a>
+                                    <a href="#" className="post-date">{d.company} - {d.category} - {d.timestamp}</a>
                                 </p>
                             </div>
                         </div>

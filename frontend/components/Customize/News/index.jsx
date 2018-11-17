@@ -63,15 +63,16 @@ class Customize extends Component {
         const customize = {
           n_article: this.state.n_article,
           keywords: this.state.keywords,
+          month: this.state.month,
         }
 
-        let uri = 'http://localhost:8000/fb_cluster/customize';
+        let uri = 'http://localhost:8000/news_cluster/customize';
 
 
         axios.post(uri, customize)
             .then((response) => {
                 let path = {
-                    pathname: '/FBcustomize/',
+                    pathname: '/news_result/',
                     state: response.data,
                 }
                 this.props.history.push(path);
@@ -109,9 +110,11 @@ class Customize extends Component {
                                       <Form.TextArea label='關聯字' placeholder='寫下更多..' name="keywords" onChange={this.handleChange} />
                                       <Form.Group inline>
                                         <label>月份</label>
-                                        <Form.Field label='9月' control='input' type='radio' name='month' value='Sep' onChange={this.handleChange}/>
-                                        <Form.Field label='10月' control='input' type='radio' name='month' value='Oct' onChange={this.handleChange}/>
-                                        <Form.Field label='11月' control='input' type='radio' name='month' value='Nov' onChange={this.handleChange}/>
+                                        <Form.Field label='9月初' control='input' type='radio' name='month' value='Sep_e' onChange={this.handleChange}/>
+                                        <Form.Field label='9月末' control='input' type='radio' name='month' value='Sep_l' onChange={this.handleChange}/>
+                                        <Form.Field label='10月初' control='input' type='radio' name='month' value='Oct_e' onChange={this.handleChange}/>
+                                        <Form.Field label='10月末' control='input' type='radio' name='month' value='Oct_l' onChange={this.handleChange}/>
+                                        <Form.Field label='11月初' control='input' type='radio' name='month' value='Nov_e' onChange={this.handleChange}/>
                                       </Form.Group>
                                       <Form.Button>Submit</Form.Button>
                                 </Segment>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import '../../../dist/catagory.css';
-import SinglePost, { About, HotArticle } from '../../Catagory/Catagory'
+import SinglePost, { About, HotArticle } from '../../Catagory/News/Catagory'
 import TopicCloud from '../../Catagory/TopicCloud'
 import Modal from "react-responsive-modal";
 
