@@ -27,45 +27,30 @@ def main():
     datefrom = ""
     dateto = ""
 
-    if sys.argv[1] == "Jan":
-        datefrom = "\"2018-01-01\""
-        dateto = "\"2018-01-31\""
-    elif sys.argv[1] == "Feb":
-        datefrom = "\"2018-02-01\""
-        dateto = "\"2018-02-31\""
-    elif sys.argv[1] == "Mar":
-        datefrom = "\"2018-03-01\""
-        dateto = "\"2018-03-31\""
-    elif sys.argv[1] == "Apr":
-        datefrom = "\"2018-04-01\""
-        dateto = "\"2018-04-31\""
-    elif sys.argv[1] == "May":
-        datefrom = "\"2018-05-01\""
-        dateto = "\"2018-05-31\""
-    elif sys.argv[1] == "Jun":
-        datefrom = "\"2018-06-01\""
-        dateto = "\"2018-06-31\""
-    elif sys.argv[1] == "Jul":
-        datefrom = "\"2018-07-01\""
-        dateto = "\"2018-07-31\""
-    elif sys.argv[1] == "Aug":
-        datefrom = "\"2018-08-01\""
-        dateto = "\"2018-08-31\""
-    elif sys.argv[1] == "Sep":
+    if sys.argv[1] == "Sep":
         datefrom = "\"2018-09-01\""
         dateto = "\"2018-09-31\""
     elif sys.argv[1] == "Oct":
         datefrom = "\"2018-10-01\""
-        dateto = "\"2018-10-31\""
+        dateto = "\"2018-10-30\""
     elif sys.argv[1] == "Nov":
         datefrom = "\"2018-11-01\""
         dateto = "\"2018-11-31\""
+    elif sys.argv[1] == "Sep_e":
+        datefrom = "\"2018-09-01\""
+        dateto = "\"2018-09-15\""
+    elif sys.argv[1] == "Sep_l":
+        datefrom = "\"2018-09-16\""
+        dateto = "\"2018-09-30\""
+    elif sys.argv[1] == "Oct_e":
+        datefrom = "\"2018-10-01\""
+        dateto = "\"2018-10-15\""
+    elif sys.argv[1] == "Oct_l":
+        datefrom = "\"2018-10-16\""
+        dateto = "\"2018-10-30\""
     elif sys.argv[1] == "Nov_e":
         datefrom = "\"2018-11-01\""
         dateto = "\"2018-11-15\""
-    elif sys.argv[1] == "Dec":
-        datefrom = "\"2018-12-01\""
-        dateto = "\"2018-12-31\""
 
 
     init_stopword()
