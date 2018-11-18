@@ -7,7 +7,9 @@ from fb_fetch.serializers import FB_fetchSerializer
 
 from rest_framework import viewsets
 
+
 from pybin.train import cluster_all as Cluster
+from pybin.train.customize import train_fb_customize as FBtrain
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 import logging
@@ -29,5 +31,10 @@ def customize(request):
     if request.method == "POST":
         received_json_data = json.loads(request.body)
 
+    # print(type(received_json_data['keywords']))
+    # test = {
+    #     'test': received_json_data['keywords'].split()
+    # }
+    FBtrain.train(received_json_data['keywords'].split(), received_json_data['n_topic'])
     data = Cluster.getFbCustomizeCluster(received_json_data['n_article'])
     return JsonResponse(data, safe=False)

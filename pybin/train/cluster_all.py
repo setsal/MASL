@@ -18,22 +18,36 @@ def Month2Datetime(month):
     dateto = ""
 
     if month == "Sep":
-        datefrom = "\"2018-01-01\""
-        dateto = "\"2018-01-31\""
-    elif month == "Sep_e":
         datefrom = "\"2018-09-01\""
         dateto = "\"2018-09-31\""
     elif month == "Oct":
         datefrom = "\"2018-10-01\""
-        dateto = "\"2018-10-31\""
+        dateto = "\"2018-10-30\""
     elif month == "Nov":
         datefrom = "\"2018-11-01\""
         dateto = "\"2018-11-31\""
+    elif month == "Sep_e":
+        datefrom = "\"2018-09-01\""
+        dateto = "\"2018-09-15\""
+    elif month == "Sep_l":
+        datefrom = "\"2018-09-16\""
+        dateto = "\"2018-09-30\""
+    elif month == "Oct_e":
+        datefrom = "\"2018-10-01\""
+        dateto = "\"2018-10-15\""
+    elif month == "Oct_l":
+        datefrom = "\"2018-10-16\""
+        dateto = "\"2018-10-30\""
     elif month == "Nov_e":
         datefrom = "\"2018-11-01\""
         dateto = "\"2018-11-15\""
 
-    return datefrom, dateto
+    dictname = "news_" + month + ".dict"
+    mmname = "news_" + month + ".mm"
+    tfidfname = "news_" + month + ".tfidf"
+    ldaname = "news_" + month + ".lda"
+
+    return datefrom, dateto, dictname, mmname, tfidfname, ldaname
 
 
 def my_absmax(sequence):
@@ -54,28 +68,23 @@ def my_absmax(sequence):
 def getFbCluster():
     logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
 
-    if ( os.path.exists("pybin/train/output/fb.dict") ):
-        dictionary = corpora.Dictionary.load("pybin/train/output/fb.dict")
-        corpus = corpora.MmCorpus("pybin/train/output/fb.mm")
-        logging.info("Load model success")
-    else:
-        logging.info("Please run the train2.py to create models")
+    mmname = "fb" + ".mm"
+    tfidfname = "fb" + ".tfidf"
+    ldaname = "fb" + ".lda"
+    idname = "fb" + ".train_id"
+    modelUrl = "pybin/train/output/"
 
-    # Load tf-idf model
-    tfidf = models.TfidfModel.load("pybin/train/output/fb.tfidf")
+    corpus = corpora.MmCorpus( modelUrl + mmname )
+    tfidf = models.TfidfModel.load( modelUrl + tfidfname )
+    lda = models.LdaModel.load( modelUrl + ldaname )
+
     corpus_tfidf = tfidf[corpus]
-
-
-    num_topic = 9
-
-    # Load to LDA model
-    lda = models.LdaModel.load("pybin/train/output/fb.lda")
-    corpus_lda = lda[corpus]
-
+    corpus_lda = lda[corpus_tfidf]
     num_topic = lda.num_topics
 
+
     # Load id list after filter
-    with open("pybin/train/output/train_id", "rb") as fp:
+    with open( modelUrl + idname, "rb") as fp:
         train_id = pickle.load(fp)
 
     # Get nearest topic for each article
@@ -236,23 +245,24 @@ def getNewsCluster():
 def getFbCustomizeCluster(n_article):
 
     logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
-    if ( os.path.exists("pybin/train/output/fb.dict") ):
-        dictionary = corpora.Dictionary.load("pybin/train/output/fb.dict")
-        corpus = corpora.MmCorpus("pybin/train/output/fb.mm")
-        logging.info("Load model success")
-    else:
-        logging.info("Please run the train2.py to create models")
 
-    # Load tf-idf model
-    tfidf = models.TfidfModel.load("pybin/train/output/fb.tfidf")
+    mmname = "fb_customize" + ".mm"
+    tfidfname = "fb_customize" + ".tfidf"
+    ldaname = "fb_customize" + ".lda"
+    idname = "fb_customize" + ".train_id"
+    modelUrl = "pybin/train/output/"
+
+    corpus = corpora.MmCorpus( modelUrl + mmname )
+    tfidf = models.TfidfModel.load( modelUrl + tfidfname )
+    lda = models.LdaModel.load( modelUrl + ldaname )
+
     corpus_tfidf = tfidf[corpus]
-
-
-    num_topic = 6
-
-    # Load to LDA model
-    lda = models.LdaModel.load("pybin/train/output/fb.lda")
     corpus_lda = lda[corpus_tfidf]
+    num_topic = lda.num_topics
+
+    # Load id list after filter
+    with open( modelUrl + idname, "rb") as fp:
+        train_id = pickle.load(fp)
 
     # Get nearest topic for each article
     topic_list = []
@@ -289,9 +299,9 @@ def getFbCustomizeCluster(n_article):
             if idx > n_article:
                 break
             single_post = {
-                'title': titles[id],
-                'content': articles[id],
-                'clubs_id': clubs_id[id]
+                'title': titles[train_id[id]],
+                'content': articles[train_id[id]],
+                'clubs_id': clubs_id[train_id[id]]
             }
             contents.append(single_post)
             idx = idx + 1
@@ -318,22 +328,19 @@ def getFbCustomizeCluster(n_article):
 
 
 def getNewsCustomizeCluster(n_article, month):
-    datefrom, dateto = Month2Datetime(month)
-    # return month, datetime, dateto
+
+    # Load static variable
+    datefrom, dateto, dictname, mmname, tfidfname, ldaname = Month2Datetime(month)
+    modelUrl = "pybin/train/output/"
+
     logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
 
-    dictionary = corpora.Dictionary.load("pybin/train/output/news_" + month+ ".dict")
-    corpus = corpora.MmCorpus("pybin/train/output/news_" + month+ ".mm")
+    corpus = corpora.MmCorpus( modelUrl + mmname )
+    tfidf = models.TfidfModel.load( modelUrl + tfidfname )
+    lda = models.LdaModel.load( modelUrl + ldaname )
 
-    # Load tf-idf model
-    tfidf = models.TfidfModel.load("pybin/train/output/news_" + month+ ".tfidf")
     corpus_tfidf = tfidf[corpus]
-
-
-    # Load to LDA model
-    lda = models.LdaModel.load("pybin/train/output/news_" + month+ ".lda")
     corpus_lda = lda[corpus_tfidf]
-
     num_topic = lda.num_topics
 
     # Get nearest topic for each article
@@ -350,7 +357,6 @@ def getNewsCustomizeCluster(n_article, month):
     companys_id = []
     categories = []
     createtime = []
-    logging.info('% % ', datefrom, dateto)
     for row in conn.execute('SELECT media_fetch_news.id, media_fetch_news.category, media_fetch_news.title, media_fetch_news.content, media_fetch_news.mid_id, media_fetch_company.name, media_fetch_news.created_at  \
                              FROM media_fetch_news \
                              INNER JOIN media_fetch_company ON media_fetch_news.mid_id = media_fetch_company.id \

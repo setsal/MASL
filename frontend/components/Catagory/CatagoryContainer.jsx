@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import '../../dist/catagory.css';
 import SinglePost, { About, HotArticle } from './Catagory'
 import TopicCloud from './TopicCloud'
-import Modal from "react-responsive-modal";
+import Modal from "react-responsive-modal"
+import {Dimmer, Loader, Segment} from 'semantic-ui-react'
 
 const Main = styled.main `
     padding: 36px 0 47px;
@@ -39,6 +40,7 @@ export default class CatagoryContainer extends Component {
             title: [],
             keywords: [],
             open: false,
+            isLoading: false,
         };
 
         this.onOpenModal = this.onOpenModal.bind(this);
@@ -47,10 +49,14 @@ export default class CatagoryContainer extends Component {
 
     async componentDidMount() {
       try {
+        this.setState({
+             isLoading: true
+        });
         const res = await fetch('http://localhost:8000/fb_cluster/');
         const topics = await res.json();
         this.setState({
-          topics
+          topics,
+          isLoading: false
         });
       } catch (e) {
         console.log(e);
@@ -81,8 +87,12 @@ export default class CatagoryContainer extends Component {
             <div style={{
                 'backgroundColor' : '#fff'
             }}>
+            <div style={{display: this.state.isLoading ? 'block' : 'none'}}>
+                <Dimmer active inverted>
+                    <Loader size='large'>Model Loading...</Loader>
+                </Dimmer>
+            </div>
             <title>Catagory</title>
-
             <Main className="rounded-circle">
                 <div className="container">
                     <div className="row justify-content-center">
