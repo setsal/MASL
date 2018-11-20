@@ -19,6 +19,7 @@ import bg1 from '../../dist/img/blog-img/bg1.png';
 
 const HomepageHeading = ({ mobile }) => (
   <Container text>
+      <title>Homepage</title>
     <Header
       as='h1'
       content='Spread the creating !'

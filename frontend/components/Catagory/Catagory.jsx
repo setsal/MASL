@@ -8,8 +8,9 @@ const imagePath = (name) => images(name, true)
 
 
 const contentStyle = {
-    'textAlign': 'left',
-    whiteSpace: 'pre-line'
+    textAlign: 'left',
+    whiteSpace: 'pre-line',
+    marginTop: '10px'
 }
 
 
@@ -48,8 +49,8 @@ const SinglePost = ({
                         </div>
 
                         <div className="post-content">
-                            <a href="#" className="headline">
-                                <h5>{d.title}</h5>
+                            <a href="#" className="headline" onClick={() => onOpenModal(d.content, d.title)}>
+                                <h5>{d.title}</h5><span style={{textAlign: 'left'}} className="post-date">{d.timestamp}</span>
                             </a>
                             <div style={contentStyle}>
                             {
@@ -58,7 +59,6 @@ const SinglePost = ({
                                 })
                             }
                         </div>
-                            <a className="btn" onClick={() => onOpenModal(d.content, d.title)}>... read more</a>
                         </div>
                         </div>
 
@@ -79,8 +79,8 @@ const SinglePost = ({
                             </div>
 
                             <div className="post-content">
-                                <a href="#" className="headline">
-                                    <h5>{d.title}</h5>
+                                <a href="#" className="headline" onClick={() => onOpenModal(d.content, d.title)}>
+                                    <h5>{d.title}</h5><span style={{textAlign: 'left'}} className="post-date">{d.timestamp}</span>
                                 </a>
                                 <div style={contentStyle}>
                                 {
@@ -89,7 +89,6 @@ const SinglePost = ({
                                     })
                                 }
                                 </div>
-                                <a className="btn" onClick={() => onOpenModal(d.content, d.title)}>...read more</a>
                             </div>
                             </div>
                         )

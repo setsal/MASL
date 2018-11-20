@@ -100,7 +100,7 @@ export const HotArticle = (<div className="sidebar-widget-area">
     <h5 className="title">Hot Article</h5>
     <div className="widget-content">
         <p>目前新聞來源: 4 間</p>
-        <p>文章總數: 1517 篇</p>
+        <p>文章總數: 19153 篇</p>
     </div>
 </div>)
 

@@ -105,7 +105,7 @@ def main():
     corpus_tfidf = tfidf[corpus]
     logging.info("Create TF-IDF model success.")
 
-    num_topic = 1
+    num_topic = 6
 
     # Transfer to LSI model
     lda = models.LdaModel(corpus, id2word=dictionary, num_topics=num_topic, iterations=100, passes=20)

@@ -99,10 +99,15 @@ def getFbCluster():
     articles = []
     titles = []
     clubs_id = []
-    for row in conn.execute('SELECT fb_fetch_article.id, fb_fetch_article.content, fb_fetch_club.name, fb_fetch_club.id FROM fb_fetch_article INNER JOIN fb_fetch_club ON fb_fetch_club.cid = fb_fetch_article.cid'):
+    createtime = []
+    for row in conn.execute('SELECT fb_fetch_article.id, fb_fetch_article.content, fb_fetch_club.name, fb_fetch_club.id, fb_fetch_article.created_at \
+                             FROM fb_fetch_article \
+                             INNER JOIN fb_fetch_club \
+                             ON fb_fetch_club.cid = fb_fetch_article.cid'):
         articles.append(row[1])
         titles.append(row[2])
         clubs_id.append(row[3])
+        createtime.append(row[4])
 
     # Sort by topic
     topic_list_sort_by_topic = []
@@ -125,7 +130,8 @@ def getFbCluster():
             single_post = {
                 'title': titles[train_id[id]],
                 'content': articles[train_id[id]],
-                'clubs_id': clubs_id[train_id[id]]
+                'clubs_id': clubs_id[train_id[id]],
+                'timestamp': createtime[train_id[id]]
             }
             contents.append(single_post)
             idx = idx + 1
@@ -154,22 +160,18 @@ def getFbCluster():
 def getNewsCluster():
     logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
 
-    if ( os.path.exists("pybin/train/output/news_sep.dict") ):
-        dictionary = corpora.Dictionary.load("pybin/train/output/news_sep.dict")
-        corpus = corpora.MmCorpus("pybin/train/output/news_sep.mm")
-        logging.info("Load model success")
-    else:
-        logging.info("Please run the train2.py to create models")
+    mmname = "news_Sep" + ".mm"
+    tfidfname = "news_Sep" + ".tfidf"
+    ldaname = "news_Sep" + ".lda"
+    modelUrl = "pybin/train/output/"
 
-    # Load tf-idf model
-    tfidf = models.TfidfModel.load("pybin/train/output/news_sep.tfidf")
+    corpus = corpora.MmCorpus( modelUrl + mmname )
+    tfidf = models.TfidfModel.load( modelUrl + tfidfname )
+    lda = models.LdaModel.load( modelUrl + ldaname )
+
     corpus_tfidf = tfidf[corpus]
-
-    num_topic = 6
-
-    # Load to LDA model
-    lda = models.LdaModel.load("pybin/train/output/news_sep.lda")
-    corpus_lda = lda[corpus]
+    corpus_lda = lda[corpus_tfidf]
+    num_topic = lda.num_topics
 
     # Get nearest topic for each article
     topic_list = []
@@ -420,6 +422,132 @@ def getNewsCustomizeCluster(n_article, month):
             'articles': contents
         }
         data.append(topic)
+
+    return(data)
+
+
+
+def getFbGraph():
+    logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
+
+    mmname = "fb" + ".mm"
+    tfidfname = "fb" + ".tfidf"
+    ldaname = "fb" + ".lda"
+    idname = "fb" + ".train_id"
+    modelUrl = "pybin/train/output/"
+
+    corpus = corpora.MmCorpus( modelUrl + mmname )
+    tfidf = models.TfidfModel.load( modelUrl + tfidfname )
+    lda = models.LdaModel.load( modelUrl + ldaname )
+
+    corpus_tfidf = tfidf[corpus]
+    corpus_lda = lda[corpus_tfidf]
+    num_topic = lda.num_topics
+
+
+    # Load id list after filter
+    with open( modelUrl + idname, "rb") as fp:
+        train_id = pickle.load(fp)
+
+    # Get nearest topic for each article
+    topic_list = []
+    index = 0
+    for doc in corpus_lda:
+        topic_list.append(my_absmax(doc))
+
+    # ======= topic of articles ========
+    # Connect to db and print the article by id
+    conn = sqlite3.connect('db.sqlite3')
+    articles = []
+    titles = []
+    clubs_id = []
+    createtime = []
+    for row in conn.execute('SELECT fb_fetch_article.id, fb_fetch_article.content, fb_fetch_club.name, fb_fetch_club.id, fb_fetch_article.created_at \
+                             FROM fb_fetch_article \
+                             INNER JOIN fb_fetch_club \
+                             ON fb_fetch_club.cid = fb_fetch_article.cid'):
+        articles.append(row[1])
+        titles.append(row[2])
+        clubs_id.append(row[3])
+        createtime.append(row[4])
+
+    # Sort by topic
+    topic_list_sort_by_topic = []
+    for i in range(num_topic):
+         topic_list_sort_by_topic.append([x for x, y in enumerate(topic_list) if y[0] == i])
+
+
+    data = {}
+    nodes_list = []
+    links_list = []
+
+    nodes_list_topic = []
+    nodes_link_topic = []
+
+    keyword_of_topic = []
+
+    default_node = {
+        'id': 'Facebook',
+        'svg': 'https://en.facebookbrand.com/wp-content/uploads/2016/05/flogo_rgb_hex-brc-site-250.png',
+        'size': 400,
+        'fontSize': 18
+    }
+
+    nodes_list.append(default_node)
+
+    for i in range(num_topic):
+
+        topic_node = {
+            'id': "主題" + str(i),
+            'symbolType': 'circle',
+            'color': 'blue',
+            'size': 300
+        }
+        topic_link = {
+            'source': 'Facebook',
+            'target': "主題" + str(i)
+        }
+        nodes_list.append(topic_node)
+        links_list.append(topic_link)
+
+        idx = 0
+        for id in topic_list_sort_by_topic[i]:
+            if idx > 20:
+                break
+            single_post = {
+                'id': clubs_id[train_id[id]],
+                'name': titles[train_id[id]],
+                'symbolType': 'circle',
+                'size': 400,
+            }
+            link = {
+                'source': "主題" + str(i),
+                'target': clubs_id[train_id[id]]
+            }
+            nodes_list_topic.append(single_post)
+            nodes_link_topic.append(link)
+            idx = idx + 1
+
+
+    test_list = list({v['id']:v for v in nodes_list_topic}.values())
+    # data.append(topic)
+    nodes_list.extend(test_list)
+    test_list = list({v['target']:v for v in nodes_link_topic}.values())
+    links_list.extend(test_list)
+
+    data = {
+        'links': links_list,
+        # [{
+        #     'source': 'Facebook',
+        #     'target': "主題1"
+        #  },
+        #  {
+        #      'source': 'Facebook',
+        #      'target': "主題2"
+        #   },
+        #  ],
+        'nodes': nodes_list
+    }
 
     return(data)
 

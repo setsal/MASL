@@ -14,11 +14,18 @@ import FBCustomize from './components/Customize'
 import FBResult from './components/Customize/CatagoryContainer'
 import NewsCustomize from './components/Customize/News'
 import NewsResult from './components/Customize/News/CatagoryContainer'
+
+
+import FBGraph from './components/Graph'
 import 'semantic-ui-css/semantic.min.css'
 import './dist/style.css'
 
 const Global = styled.div `
     font-family: 'Noto Sans TC', sans-serif;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 100%;    
 `;
 
 
@@ -38,6 +45,8 @@ class App1 extends React.Component {
 
                 <Route path="/news_customize" component={NewsCustomize} />
                 <Route path="/news_result" component={NewsResult} />
+
+                <Route path="/fb_trend" component={FBGraph} />
             <Footer />
         </Global>
         </BrowserRouter>

@@ -38,3 +38,8 @@ def customize(request):
     FBtrain.train(received_json_data['keywords'].split(), received_json_data['n_topic'])
     data = Cluster.getFbCustomizeCluster(received_json_data['n_article'])
     return JsonResponse(data, safe=False)
+
+
+def graph(request):
+    data = Cluster.getFbGraph()
+    return JsonResponse(data, safe=False)
