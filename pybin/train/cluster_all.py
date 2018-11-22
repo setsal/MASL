@@ -214,11 +214,12 @@ def getNewsCluster():
 
 
         contents = []
+        kinds = []
         idx = 0
         for id in topic_list_sort_by_topic[i]:
             if ( topic_list[id][1] < 0.75 ):
                 continue
-            if idx > 50:
+            if idx > 20:
                 break
             single_post = {
                 'category': categories[id],
@@ -230,8 +231,13 @@ def getNewsCluster():
                 'timestamp': createtime[id],
                 'similarities': round(float(topic_list[id][1]), 2)
             }
+            kinds.append(categories[id])
             contents.append(single_post)
             idx = idx + 1
+
+        from collections import Counter
+        counter = Counter(kinds).most_common(2)
+        kind = counter[0][0] + "、" + counter[1][0]
 
         key_list = lda.show_topic(i, topn=10)
         temp = []
@@ -245,7 +251,7 @@ def getNewsCluster():
         keyword_of_topic.append(temp)
 
         topic = {
-            'kind': n_topic,
+            'kind': kind,
             'keyword_of_topic': keyword_of_topic[i],
             'articles': contents
         }
@@ -405,6 +411,7 @@ def getNewsCustomizeCluster(n_article, month):
 
 
         contents = []
+        kinds = []
         idx = 0
         for id in topic_list_sort_by_topic[i]:
             if topic_list[id][1] < 0.75:
@@ -421,8 +428,13 @@ def getNewsCustomizeCluster(n_article, month):
                 'timestamp': createtime[id],
                 'similarities': round(float(topic_list[id][1]), 2)
             }
+            kinds.append(categories[id])
             contents.append(single_post)
             idx = idx + 1
+
+        from collections import Counter
+        counter = Counter(kinds).most_common(2)
+        kind = counter[0][0] + "、" + counter[1][0]
 
         key_list = lda.show_topic(i, topn=10)
         temp = []
@@ -436,7 +448,7 @@ def getNewsCustomizeCluster(n_article, month):
         keyword_of_topic.append(temp)
 
         topic = {
-            'kind': n_topic,
+            'kind': kind,
             'keyword_of_topic': keyword_of_topic[i],
             'articles': contents
         }
@@ -549,22 +561,14 @@ def getFbGraph():
 
 
     test_list = list({v['id']:v for v in nodes_list_topic}.values())
-    # data.append(topic)
     nodes_list.extend(test_list)
+
+
     test_list = list({v['target']:v for v in nodes_link_topic}.values())
     links_list.extend(test_list)
 
     data = {
         'links': links_list,
-        # [{
-        #     'source': 'Facebook',
-        #     'target': "主題1"
-        #  },
-        #  {
-        #      'source': 'Facebook',
-        #      'target': "主題2"
-        #   },
-        #  ],
         'nodes': nodes_list
     }
 

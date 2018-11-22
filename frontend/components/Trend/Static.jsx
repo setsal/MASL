@@ -479,9 +479,6 @@ export const Oct_e = [
         'text': '財運',
         'value': 6.0
     }, {
-        'text': '讚',
-        'value': 6.0
-    }, {
         'text': '結婚',
         'value': 6.0
     }, {
@@ -616,12 +613,6 @@ export const Oct_l = [
         'text': '播出',
         'value': 6.0
     }, {
-        'text': 'Ａ',
-        'value': 9.0
-    }, {
-        'text': 'Ｐ',
-        'value': 9.0
-    }, {
         'text': '台股',
         'value': 9.0
     }, {
@@ -641,9 +632,6 @@ export const Oct_l = [
         'value': 9.0
     }, {
         'text': '高鐵',
-        'value': 9.0
-    }, {
-        'text': 'Ｔ',
         'value': 9.0
     }, {
         'text': '死者',
@@ -765,9 +753,6 @@ export const Nov_e = [
         'value': 9.0
     }, {
         'text': '免費',
-        'value': 9.0
-    }, {
-        'text': '搭',
         'value': 9.0
     }, {
         'text': '擊出',
