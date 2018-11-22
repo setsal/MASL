@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import '../../../dist/catagory.css';
 const images = require.context('../../../dist/img/media-img', true)
 const imagePath = (name) => images(name, true)
+import { Image, Item } from 'semantic-ui-react'
 
 const contentStyle = {
     whiteSpace: 'pre-line'
@@ -36,51 +37,46 @@ const SinglePost = ({
                 <div key={index} className="tab-pane fade show active" id={'world-tab-' + index} role="tabpanel" aria-labelledby={'tab' + index}>
                 {
                     topic.articles.map((d, index_inner) => (
-
                         <div key={index_inner} className="single-blog-post post-style-4 d-flex align-items-center">
-                        <div className="post-thumbnail">
-                            {
+                        <Item.Group divided unstackable>
+                            <Item>
+                              <Item.Image src={imagePath('./'+ d.company_id + '.png')} />
 
-                                <img src={imagePath('./'+ d.company_id + '.png')} alt=""/>
-
-                            }
+                              <Item.Content style={{ lineHeight: '4' }}>
+                                <Item.Header as='a' onClick={() => onOpenModal(d.content, d.title)}>{d.title}</Item.Header>
+                                <Item.Meta>{d.company} - {d.category} - {d.timestamp} </Item.Meta>
+                                <Item.Description>
+                                  <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+                                </Item.Description>
+                                <Item.Extra>[相似度]: {d.similarities}</Item.Extra>
+                              </Item.Content>
+                            </Item>
+                        </Item.Group>
                         </div>
-                        <div className="post-content">
-                            <a className="headline btn" onClick={() => onOpenModal(d.content, d.title)} >
-                                <h5>{d.title}</h5>
-                            </a>
-                            <div className="post-meta">
-                                <p>
-                                    <a href="#" className="post-date">{d.company} - {d.category} - {d.timestamp} - [相似度]: {d.similarities}</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>))
+                    ))
                 }
             </div>)
         } else {
             return (<div key={index} className="tab-pane fade" id={'world-tab-' + index} role="tabpanel" aria-labelledby={'tab' + index}>
                 {
-                    topic.articles.map((d, index_inner) => (<div key={index_inner} className="single-blog-post post-style-4 d-flex align-items-center">
-                        <div className="post-thumbnail">
-                            {
+                    topic.articles.map((d, index_inner) => (
+                        <div key={index_inner} className="single-blog-post post-style-4 d-flex align-items-center">
+                        <Item.Group divided unstackable>
+                            <Item>
+                              <Item.Image src={imagePath('./'+ d.company_id + '.png')} />
 
-                                <img src={imagePath('./'+ d.company_id + '.png')} alt=""/>
-
-                            }
+                              <Item.Content style={{ lineHeight: '4' }}>
+                                <Item.Header as='a' onClick={() => onOpenModal(d.content, d.title)}>{d.title}</Item.Header>
+                                <Item.Meta>{d.company} - {d.category} - {d.timestamp} </Item.Meta>
+                                <Item.Description>
+                                  <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+                                </Item.Description>
+                                <Item.Extra>[相似度]: {d.similarities}</Item.Extra>
+                              </Item.Content>
+                            </Item>
+                        </Item.Group>
                         </div>
-
-                        <div className="post-content">
-                            <a className="headline btn" onClick={() => onOpenModal(d.content, d.title)} >
-                                <h5>{d.title}</h5>
-                            </a>
-                            <div className="post-meta">
-                                <p>
-                                    <a href="#" className="post-date">{d.company} - {d.category} - {d.timestamp} - [相似度]: {d.similarities}</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>))
+                    ))
                 }
             </div>)
         }
