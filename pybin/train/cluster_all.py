@@ -134,7 +134,7 @@ def getFbCluster():
                 'content': articles[train_id[id]],
                 'clubs_id': clubs_id[train_id[id]],
                 'timestamp': createtime[train_id[id]],
-                'similarities': float(topic_list[id][1])
+                'similarities': round(float(topic_list[id][1]), 2)
             }
             contents.append(single_post)
             idx = idx + 1
@@ -224,10 +224,11 @@ def getNewsCluster():
                 'category': categories[id],
                 'title': titles[id],
                 'content': articles[id],
+                'description': articles[id][:130] + "....",
                 'company_id': companys_id[id],
                 'company': companys[id],
                 'timestamp': createtime[id],
-                'similarities': float(topic_list[id][1])
+                'similarities': round(float(topic_list[id][1]), 2)
             }
             contents.append(single_post)
             idx = idx + 1
@@ -318,7 +319,7 @@ def getFbCustomizeCluster(n_article):
                 'content': articles[train_id[id]],
                 'clubs_id': clubs_id[train_id[id]],
                 'timestamp': createtime[train_id[id]],
-                'similarities': float(topic_list[id][1])
+                'similarities': round(float(topic_list[id][1]), 2)
             }
             contents.append(single_post)
             idx = idx + 1
@@ -412,9 +413,11 @@ def getNewsCustomizeCluster(n_article, month):
                 'category': categories[id],
                 'title': titles[id],
                 'content': articles[id],
+                'description': articles[id][:30],
                 'company_id': companys_id[id],
                 'company': companys[id],
-                'timestamp': createtime[id]
+                'timestamp': createtime[id],
+                'similarities': round(float(topic_list[id][1]), 2)
             }
             contents.append(single_post)
             idx = idx + 1

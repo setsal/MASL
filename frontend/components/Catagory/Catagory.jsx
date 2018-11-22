@@ -49,7 +49,7 @@ const SinglePost = ({
 
                         <div className="post-content">
                             <a href="#" className="headline" onClick={() => onOpenModal(d.content, d.title)}>
-                                <h5>{d.title}</h5><span style={{textAlign: 'left'}} className="post-date">[時間]:{d.timestamp}&nbsp;&nbsp;&nbsp;[相似度]: {d.similarities}</span>
+                                <h5>{d.title}</h5><span style={{textAlign: 'left'}} className="post-date">[時間]:{d.timestamp}&nbsp;&nbsp;&nbsp;[關聯度]: {d.similarities}</span>
                             </a>
                             <div style={contentStyle}>
                             {
@@ -79,7 +79,7 @@ const SinglePost = ({
 
                             <div className="post-content">
                                 <a href="#" className="headline" onClick={() => onOpenModal(d.content, d.title)}>
-                                    <h5>{d.title}</h5><span style={{textAlign: 'left'}} className="post-date">[時間]:{d.timestamp}&nbsp;&nbsp;&nbsp;[相似度]: {d.similarities}</span>
+                                    <h5>{d.title}</h5><span style={{textAlign: 'left'}} className="post-date">[時間]:{d.timestamp}&nbsp;&nbsp;&nbsp;[關聯度]: {d.similarities}</span>
                                 </a>
                                 <div style={contentStyle}>
                                 {

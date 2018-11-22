@@ -42,13 +42,13 @@ const SinglePost = ({
                             <Item>
                               <Item.Image src={imagePath('./'+ d.company_id + '.png')} />
 
-                              <Item.Content style={{ lineHeight: '4' }}>
-                                <Item.Header as='a' onClick={() => onOpenModal(d.content, d.title)}>{d.title}</Item.Header>
+                              <Item.Content style={{ lineHeight: '3.5' }}>
+                                <Item.Header as='a' onClick={() => onOpenModal(d.content, d.title)} style={{ 'lineHeight': '1.285em', 'paddingTop': '24px' }}>{d.title}</Item.Header>
                                 <Item.Meta>{d.company} - {d.category} - {d.timestamp} </Item.Meta>
                                 <Item.Description>
-                                  <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+                                  {d.description}
                                 </Item.Description>
-                                <Item.Extra>[相似度]: {d.similarities}</Item.Extra>
+                                <Item.Extra>[關聯度]: {d.similarities}</Item.Extra>
                               </Item.Content>
                             </Item>
                         </Item.Group>
@@ -66,12 +66,12 @@ const SinglePost = ({
                               <Item.Image src={imagePath('./'+ d.company_id + '.png')} />
 
                               <Item.Content style={{ lineHeight: '4' }}>
-                                <Item.Header as='a' onClick={() => onOpenModal(d.content, d.title)}>{d.title}</Item.Header>
+                                <Item.Header as='a' onClick={() => onOpenModal(d.content, d.title)} style={{ 'lineHeight': '1.285em', 'paddingTop': '24px' }}>{d.title}</Item.Header>
                                 <Item.Meta>{d.company} - {d.category} - {d.timestamp} </Item.Meta>
                                 <Item.Description>
-                                  <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+                                  {d.description}
                                 </Item.Description>
-                                <Item.Extra>[相似度]: {d.similarities}</Item.Extra>
+                                <Item.Extra>[關聯度]: {d.similarities}</Item.Extra>
                               </Item.Content>
                             </Item>
                         </Item.Group>
