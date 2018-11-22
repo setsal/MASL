@@ -17,6 +17,7 @@ import NewsResult from './components/Customize/News/CatagoryContainer'
 
 
 import FBGraph from './components/Graph'
+import NewsTrend from './components/Trend'
 import 'semantic-ui-css/semantic.min.css'
 import './dist/style.css'
 
@@ -25,7 +26,7 @@ const Global = styled.div `
     min-height: 100%;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: 100%;    
+    grid-template-columns: 100%;
 `;
 
 
@@ -46,7 +47,8 @@ class App1 extends React.Component {
                 <Route path="/news_customize" component={NewsCustomize} />
                 <Route path="/news_result" component={NewsResult} />
 
-                <Route path="/fb_trend" component={FBGraph} />
+                <Route path="/fb_graph" component={FBGraph} />
+                <Route path="/news_trend" component={NewsTrend} />
             <Footer />
         </Global>
         </BrowserRouter>

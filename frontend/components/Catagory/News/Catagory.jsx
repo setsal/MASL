@@ -25,13 +25,19 @@ const SinglePost = ({
         )
     });
 
+
+
     const articleContents = topics.map((topic, index) => {
+
+
         if (index == 0) {
             return (
 
                 <div key={index} className="tab-pane fade show active" id={'world-tab-' + index} role="tabpanel" aria-labelledby={'tab' + index}>
                 {
-                    topic.articles.map((d, index_inner) => (<div key={index_inner} className="single-blog-post post-style-4 d-flex align-items-center">
+                    topic.articles.map((d, index_inner) => (
+
+                        <div key={index_inner} className="single-blog-post post-style-4 d-flex align-items-center">
                         <div className="post-thumbnail">
                             {
 
@@ -45,7 +51,7 @@ const SinglePost = ({
                             </a>
                             <div className="post-meta">
                                 <p>
-                                    <a href="#" className="post-date">{d.company} - {d.category} - {d.timestamp}</a>
+                                    <a href="#" className="post-date">{d.company} - {d.category} - {d.timestamp} - [相似度]: {d.similarities}</a>
                                 </p>
                             </div>
                         </div>
@@ -70,9 +76,7 @@ const SinglePost = ({
                             </a>
                             <div className="post-meta">
                                 <p>
-                                    <a href="#" className="post-author">{d.company}&nbsp;</a>
-                                    -
-                                    <a href="#" className="post-date">&nbsp;{d.category}</a>
+                                    <a href="#" className="post-date">{d.company} - {d.category} - {d.timestamp} - [相似度]: {d.similarities}</a>
                                 </p>
                             </div>
                         </div>

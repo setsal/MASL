@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import '../../dist/catagory.css';
-import bg1 from '../../dist/img/blog-img/bg1.png';
 
 const images = require.context('../../dist/img/fb-club-img', true)
 const imagePath = (name) => images(name, true)
@@ -50,7 +49,7 @@ const SinglePost = ({
 
                         <div className="post-content">
                             <a href="#" className="headline" onClick={() => onOpenModal(d.content, d.title)}>
-                                <h5>{d.title}</h5><span style={{textAlign: 'left'}} className="post-date">{d.timestamp}</span>
+                                <h5>{d.title}</h5><span style={{textAlign: 'left'}} className="post-date">[時間]:{d.timestamp}&nbsp;&nbsp;&nbsp;[相似度]: {d.similarities}</span>
                             </a>
                             <div style={contentStyle}>
                             {
@@ -80,7 +79,7 @@ const SinglePost = ({
 
                             <div className="post-content">
                                 <a href="#" className="headline" onClick={() => onOpenModal(d.content, d.title)}>
-                                    <h5>{d.title}</h5><span style={{textAlign: 'left'}} className="post-date">{d.timestamp}</span>
+                                    <h5>{d.title}</h5><span style={{textAlign: 'left'}} className="post-date">[時間]:{d.timestamp}&nbsp;&nbsp;&nbsp;[相似度]: {d.similarities}</span>
                                 </a>
                                 <div style={contentStyle}>
                                 {

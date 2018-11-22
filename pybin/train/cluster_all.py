@@ -87,6 +87,7 @@ def getFbCluster():
     with open( modelUrl + idname, "rb") as fp:
         train_id = pickle.load(fp)
 
+
     # Get nearest topic for each article
     topic_list = []
     index = 0
@@ -114,7 +115,6 @@ def getFbCluster():
     for i in range(num_topic):
          topic_list_sort_by_topic.append([x for x, y in enumerate(topic_list) if y[0] == i])
 
-
     data = []
     topic = {}
     keyword_of_topic = []
@@ -125,13 +125,16 @@ def getFbCluster():
         contents = []
         idx = 0
         for id in topic_list_sort_by_topic[i]:
-            if idx > 20:
+            if ( topic_list[id][1] < 0.5 ):
+                continue
+            if idx > 10:
                 break
             single_post = {
                 'title': titles[train_id[id]],
                 'content': articles[train_id[id]],
                 'clubs_id': clubs_id[train_id[id]],
-                'timestamp': createtime[train_id[id]]
+                'timestamp': createtime[train_id[id]],
+                'similarities': float(topic_list[id][1])
             }
             contents.append(single_post)
             idx = idx + 1
@@ -187,12 +190,14 @@ def getNewsCluster():
     companys = []
     companys_id = []
     categories = []
-    for row in conn.execute('SELECT media_fetch_news.id, media_fetch_news.category, media_fetch_news.title, media_fetch_news.content, media_fetch_news.mid_id, media_fetch_company.name FROM media_fetch_news INNER JOIN media_fetch_company ON media_fetch_news.mid_id = media_fetch_company.id WHERE media_fetch_news.created_at >= "2018-09-01" and media_fetch_news.created_at <= "2018-09-30";'):
+    createtime = []
+    for row in conn.execute('SELECT media_fetch_news.id, media_fetch_news.category, media_fetch_news.title, media_fetch_news.content, media_fetch_news.mid_id, media_fetch_company.name, media_fetch_news.created_at FROM media_fetch_news INNER JOIN media_fetch_company ON media_fetch_news.mid_id = media_fetch_company.id WHERE media_fetch_news.created_at >= "2018-09-01" and media_fetch_news.created_at <= "2018-09-30";'):
         categories.append(row[1])
         titles.append(row[2])
         articles.append(row[3])
         companys_id.append(row[4])
         companys.append(row[5])
+        createtime.append(row[6])
 
     # Sort by topic
     topic_list_sort_by_topic = []
@@ -211,6 +216,8 @@ def getNewsCluster():
         contents = []
         idx = 0
         for id in topic_list_sort_by_topic[i]:
+            if ( topic_list[id][1] < 0.75 ):
+                continue
             if idx > 50:
                 break
             single_post = {
@@ -218,7 +225,9 @@ def getNewsCluster():
                 'title': titles[id],
                 'content': articles[id],
                 'company_id': companys_id[id],
-                'company': companys[id]
+                'company': companys[id],
+                'timestamp': createtime[id],
+                'similarities': float(topic_list[id][1])
             }
             contents.append(single_post)
             idx = idx + 1
@@ -277,11 +286,15 @@ def getFbCustomizeCluster(n_article):
     articles = []
     titles = []
     clubs_id = []
-    for row in conn.execute('SELECT fb_fetch_article.id, fb_fetch_article.content, fb_fetch_club.name, fb_fetch_club.id FROM fb_fetch_article INNER JOIN fb_fetch_club ON fb_fetch_club.cid = fb_fetch_article.cid'):
+    createtime = []
+    for row in conn.execute('SELECT fb_fetch_article.id, fb_fetch_article.content, fb_fetch_club.name, fb_fetch_club.id, fb_fetch_article.created_at \
+                             FROM fb_fetch_article \
+                             INNER JOIN fb_fetch_club \
+                             ON fb_fetch_club.cid = fb_fetch_article.cid'):
         articles.append(row[1])
         titles.append(row[2])
         clubs_id.append(row[3])
-
+        createtime.append(row[4])
     # Sort by topic
     topic_list_sort_by_topic = []
     for i in range(num_topic):
@@ -303,7 +316,9 @@ def getFbCustomizeCluster(n_article):
             single_post = {
                 'title': titles[train_id[id]],
                 'content': articles[train_id[id]],
-                'clubs_id': clubs_id[train_id[id]]
+                'clubs_id': clubs_id[train_id[id]],
+                'timestamp': createtime[train_id[id]],
+                'similarities': float(topic_list[id][1])
             }
             contents.append(single_post)
             idx = idx + 1
@@ -389,9 +404,8 @@ def getNewsCustomizeCluster(n_article, month):
         contents = []
         idx = 0
         for id in topic_list_sort_by_topic[i]:
-            # if topic_list[id][1] < 0.85:
-            #     idx = idx + 1
-            #     continue
+            if topic_list[id][1] < 0.75:
+                continue
             if idx > n_article:
                 break
             single_post = {

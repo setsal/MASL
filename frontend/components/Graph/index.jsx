@@ -24,8 +24,8 @@ const myConfig = {
     "width": 1200,
     "d3": {
       "alphaTarget": 0.05,
-      "gravity": -500,
-      "linkLength": 150,
+      "gravity": -700,
+      "linkLength": 200,
       "linkStrength": 2
     },
     "node": {
@@ -37,7 +37,7 @@ const myConfig = {
       "highlightFontSize": 14,
       "highlightFontWeight": "bold",
       "highlightStrokeColor": "red",
-      "highlightStrokeWidth": 1.5,
+      "highlightStrokeWidth": 2.0,
       "mouseCursor": "crosshair",
       "labelProperty": "name",
       "opacity": 0.9,
@@ -85,7 +85,7 @@ class AssGraph extends Component {
     }
 
     async componentWillMount() {
-        const res = await fetch('http://localhost:8000/fb_graph/')
+        const res = await fetch('http://localhost:8000/api/fbgraph/')
         const data2 = await res.json()
         data2.nodes.map((singledata , index ) => {
             if( typeof singledata.id === 'number' )

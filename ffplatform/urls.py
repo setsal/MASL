@@ -37,8 +37,9 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('fb_cluster/', fb_fetch_views.index),
     path('fb_cluster/customize', fb_fetch_views.customize),
-    path('fb_graph/', fb_fetch_views.graph),
+    path('api/fbgraph/', fb_fetch_views.graph),
     path('news_cluster/', media_fetch_views.index),
     path('news_cluster/customize', media_fetch_views.customize),
-    path('fb_trend/', generic.TemplateView.as_view(template_name='view1.html')),
+    path('fb_graph/', generic.TemplateView.as_view(template_name='view1.html')),
+    path('news_trend/', generic.TemplateView.as_view(template_name='view1.html')),
 ]
