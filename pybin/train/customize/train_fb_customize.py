@@ -9,14 +9,51 @@ import sys
 import io
 import operator
 import pickle
-from .jiebaFunc import init_stopword, getArticle, getSegment
+from .jiebaFunc import init_stopword, getArticleByTime, getSegment
 
 
-def train(keywords, num_topic):
+def Exhibition2Datetime(exhibition):
+    datefrom = ""
+    dateto = ""
+
+    if exhibition == "FF31":
+        datefrom = "\"2017-12-01\""
+        dateto = "\"2018-04-14\""
+    elif exhibition == "FF32":
+        datefrom = "\"2018-04-15\""
+        dateto = "\"2018-11-11\""
+
+    elif exhibition == "CWT49":
+        datefrom = "\"2018-04-01\""
+        dateto = "\"2018-08-20\""
+    elif exhibition == "CWT48":
+        datefrom = "\"2017-12-15\""
+        dateto = "\"2018-03-31\""
+
+
+    elif exhibition == "PF26":
+        datefrom = "\"2016-11-15\""
+        dateto = "\"2017-04-29\""
+    elif exhibition == "PF27":
+        datefrom = "\"2017-04-30\""
+        dateto = "\"2018-10-30\""
+    elif exhibition == "PF28":
+        datefrom = "\"2017-10-31\""
+        dateto = "\"2018-05-28\""
+
+
+    return datefrom, dateto
+
+
+def train(keywords, num_topic, exhibition):
     logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
     init_stopword()
-    article_lists = getArticle("fb_fetch_article")
+
+    datefrom, dateto = Exhibition2Datetime(exhibition)
+
+    article_lists = getArticleByTime("fb_fetch_article", datefrom, dateto)
     seg_list = getSegment(article_lists)
+
 
     train_list = []
     train_id = []
@@ -74,4 +111,4 @@ def train(keywords, num_topic):
         print(lda.print_topic(i))
         print('\n')
 
-    return
+    return datefrom, dateto

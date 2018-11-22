@@ -35,8 +35,8 @@ def customize(request):
     # test = {
     #     'test': received_json_data['keywords'].split()
     # }
-    FBtrain.train(received_json_data['keywords'].split(), received_json_data['n_topic'])
-    data = Cluster.getFbCustomizeCluster(received_json_data['n_article'])
+    datefrom, dateto = FBtrain.train(received_json_data['keywords'].split(), received_json_data['n_topic'], received_json_data['exhibition'])
+    data = Cluster.getFbCustomizeCluster(received_json_data['n_article'], datefrom, dateto )
     return JsonResponse(data, safe=False)
 
 

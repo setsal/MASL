@@ -146,7 +146,14 @@ class Customize extends Component {
                                         <label>選擇展覽區間</label>
                                         <Form.Field label='FF32' control='input' type='radio' name='exhibition' value='FF32' onChange={this.handleChange}/>
                                         <Form.Field label='FF31' control='input' type='radio' name='exhibition' value='FF31' onChange={this.handleChange}/>
-                                        <Form.Field label='FF30' control='input' type='radio' name='exhibition' value='FF30' onChange={this.handleChange}/>
+
+                                        <Form.Field label='CWT49' control='input' type='radio' name='exhibition' value='CWT49' onChange={this.handleChange}/>
+                                        <Form.Field label='CWT48' control='input' type='radio' name='exhibition' value='CWT48' onChange={this.handleChange}/>
+
+                                        <Form.Field label='PF28' control='input' type='radio' name='exhibition' value='PF28' onChange={this.handleChange}/>
+                                        <Form.Field label='PF27' control='input' type='radio' name='exhibition' value='PF27' onChange={this.handleChange}/>
+                                        <Form.Field label='PF26' control='input' type='radio' name='exhibition' value='PF26' onChange={this.handleChange}/>
+
                                       </Form.Group>
                                       <Form.Group inline style={{ textAlign: 'left'}}>
       <Form.Checkbox label='我已知悉並了解結果皆為訓練出來的成果，無論好與壞，不可怪罪很辛苦的開發者QAQ' name="checkbox" onClick={this.handleCheckBox} />

@@ -254,8 +254,9 @@ def getNewsCluster():
     return(data)
 
 
-def getFbCustomizeCluster(n_article):
-
+def getFbCustomizeCluster(n_article, datefrom, dateto):
+    logging.info(datefrom)
+    logging.info(dateto)
     logging.basicConfig(format='[%(levelname)s] : %(message)s', level=logging.INFO)
 
     mmname = "fb_customize" + ".mm"
@@ -291,7 +292,8 @@ def getFbCustomizeCluster(n_article):
     for row in conn.execute('SELECT fb_fetch_article.id, fb_fetch_article.content, fb_fetch_club.name, fb_fetch_club.id, fb_fetch_article.created_at \
                              FROM fb_fetch_article \
                              INNER JOIN fb_fetch_club \
-                             ON fb_fetch_club.cid = fb_fetch_article.cid'):
+                             ON fb_fetch_club.cid = fb_fetch_article.cid \
+                             WHERE fb_fetch_article.created_at >= {} and fb_fetch_article.created_at <= {}'.format(datefrom, dateto)):
         articles.append(row[1])
         titles.append(row[2])
         clubs_id.append(row[3])
