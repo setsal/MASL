@@ -2,6 +2,9 @@
 
 Cheers OAO/
 
+![demo](https://raw.githubusercontent.com/setsal/MASL/master/frontend/dist/brand.jpg)
+
+
 ## Getting started
 
 Install dependencies:
