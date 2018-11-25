@@ -22,8 +22,6 @@ class Fb_fetchViewSet(viewsets.ModelViewSet):
 
 def index(request):
     data = Cluster.getFbCluster()
-
-    #word = cluster_simple.getCluster()
     return JsonResponse(data, safe=False)
 
 
@@ -31,10 +29,6 @@ def customize(request):
     if request.method == "POST":
         received_json_data = json.loads(request.body)
 
-    # print(type(received_json_data['keywords']))
-    # test = {
-    #     'test': received_json_data['keywords'].split()
-    # }
     datefrom, dateto = FBtrain.train(received_json_data['keywords'].split(), received_json_data['n_topic'], received_json_data['exhibition'])
     data = Cluster.getFbCustomizeCluster(received_json_data['n_article'], datefrom, dateto )
     return JsonResponse(data, safe=False)

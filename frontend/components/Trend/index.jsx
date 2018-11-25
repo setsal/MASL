@@ -70,14 +70,14 @@ class NewTrend extends Component {
                                     <div>
                                         <WordCloud width={picwidth} font={picfont} data={Sep_e} fontSizeMapper={fontSizeMapper} rotate={rotate} />
                                         <Header as='h3' textAlign='center' style={{ marginTop: '1.2rem', verticalAlign: 'baseline'}}>
-                                                9月收斂自詞
+                                                9月收斂字詞
                                         </Header>
                                     </div>
                                     <div>
 
                                             <WordCloud width={picwidth} font={picfont} data={Sep_l} fontSizeMapper={fontSizeMapper} rotate={rotate} />
                                         <Header as='h3' textAlign='center' style={{ marginTop: '1.2rem'}}>
-                                            10月初收斂自詞
+                                            10月初收斂字詞
                                         </Header>
 
                                     </div>
@@ -85,7 +85,7 @@ class NewTrend extends Component {
 
                                         <WordCloud width={picwidth} font={picfont} data={Oct_e} fontSizeMapper={fontSizeMapper} rotate={rotate} />
                                         <Header as='h3' textAlign='center' style={{ marginTop: '1.2rem'}}>
-                                            10月末收斂自詞
+                                            10月末收斂字詞
                                         </Header>
 
                                     </div>
@@ -93,14 +93,14 @@ class NewTrend extends Component {
 
                                             <WordCloud width={picwidth} font={picfont} data={Oct_l} fontSizeMapper={fontSizeMapper} rotate={rotate} />
                                         <Header as='h3' textAlign='center' style={{ marginTop: '1.2rem'}}>
-                                            10月末收斂自詞
+                                            10月末收斂字詞
                                         </Header>
                                     </div>
                                     <div>
 
                                             <WordCloud width={picwidth} font={picfont} data={Nov_e} fontSizeMapper={fontSizeMapper} rotate={rotate} />
                                         <Header as='h3' textAlign='center' style={{ marginTop: '1.2rem'}}>
-                                            11月初收斂自詞
+                                            11月初收斂字詞
                                         </Header>
 
                                     </div>

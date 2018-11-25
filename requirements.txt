@@ -30,7 +30,6 @@ pytz==2018.3
 query-string==1.0.2
 request==1.0.2
 requests==2.18.4
-requests2==2.16.0
 s3transfer==0.1.13
 scipy==1.1.0
 six==1.11.0

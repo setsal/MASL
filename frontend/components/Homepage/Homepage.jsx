@@ -16,6 +16,7 @@ import {
   Visibility,
 } from 'semantic-ui-react'
 import bg1 from '../../dist/img/blog-img/bg1.png';
+import bg3 from '../../dist/img/blog-img/bg3.png';
 
 const HomepageHeading = ({ mobile }) => (
   <Container text>
@@ -170,9 +171,38 @@ const HomepageLayout = () => (
             <Image bordered rounded size='large' src={bg1} />
           </Grid.Column>
         </Grid.Row>
-
       </Grid>
     </Segment>
+    <Segment style={{ padding: '8em 0em' }} vertical>
+        <Grid container stackable verticalAlign='middle' celled='internally'>
+          <Grid.Row>
+            <Grid.Column width={16}>
+          <Header as='h3' style={{ fontSize: '2em' }}>
+              趨勢變化, 畫家關聯
+          </Header>
+          <p style={{ fontSize: '1.33em' }}>
+             查看訓練後的文字收斂狀況, 觀察彼此的關系
+          </p>
+        </Grid.Column>
+        <Divider
+          as='h4'
+          className='header'
+          horizontal
+          style={{ margin: '3em 0em', textTransform: 'uppercase' }}
+        >
+          <a href='#'>我是分隔線</a>
+        </Divider>
+        <Grid.Column width={16}>
+          <Header as='h3' style={{ fontSize: '2em' }}>
+            自定義主題, 客製化調整
+          </Header>
+          <p style={{ fontSize: '1.33em' }}>
+            限定收斂範圍, 讓展覽或是門路不再侷限, 找出有興趣, 或是類似相關的主題吧！
+          </p>
+          </Grid.Column>
+          </Grid.Row>
+          </Grid>
+      </Segment>
   </ResponsiveContainer>
 )
 export default HomepageLayout

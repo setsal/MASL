@@ -25,28 +25,25 @@ Create DB file with django
  - ``$ python manage.py migrate``
 
 Insert Data:
- 1. Add text file in `pybin/text_transfer/text/`
- 2. enter `pybin/text_transfer` and Run `transfer.py [textfile]`
- 3. Use sqlite browser to check the data is correct
+ 1. Facebook API
+     - Run `pybin/fb_fetch/crawler_and_insert.py`
+ 2. News Data
+     - Run `pybin/media_fetch/news_transfer.py`
 
 Reset & Clear All Data in DB ( recommend ):
- - Run `pybin/text_transfer/reset_table.py`
+ - Run `reset_table.py` in `fb_fetch` or `media`
 
 Reset Migration ( if it is necessary ):
   1. Remove target table in database
   2. run the ResetMigration.sh script
 
-
 ## Cautions:
- -  WordCloud Package need Microsoft Visual Studio C++ 14.0 package, you must install it before using.
+ -  Some Package need Microsoft Visual Studio C++ 14.0 package, you must install it before using. ( e.g. WordCloud )
     1. Install Via Visual Studio
-    2. Install Via binary .whl file ( http://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud )
-    3. or you can install in this way : ``py -m pip install ../Some_dir/wordcloud-1.5.0-cp36-cp36m-win_amd64.whl
-``
+    2. Install Via binary .whl file
 
 
 ## Contributors
-
 - setsal Lan
 - MeteorV Hsu
 - Andy Chu
